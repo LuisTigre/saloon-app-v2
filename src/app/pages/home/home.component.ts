@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
+import { PagerComponent } from '../../components/pager/pager.component';
+
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [],
+  imports: [PagerComponent],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrl: './home.component.scss'
 })
 export class HomeComponent {
 
