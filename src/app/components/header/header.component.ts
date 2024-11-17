@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -10,9 +10,10 @@ import { Component, EventEmitter, Output } from '@angular/core';
 export class HeaderComponent {
 
   @Output() toogleMenu = new EventEmitter(); 
+  @Input() menu_button: string = "menu";
   
 
-  handleToogleMenu(): void{
+  handleToogleMenu(): void{                  
     this.toogleMenu.emit();
   }
 

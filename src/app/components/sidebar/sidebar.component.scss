@@ -14,12 +14,12 @@
 
     &.open {
       width: 70px; 
+      background-color: #ccc;
     }
   }
 
   .main-content {
     flex: 1;
-    background-color: grey;
     transition: margin-left 0.3s ease;
   }
 }

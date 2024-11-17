@@ -17,8 +17,14 @@ import { SidebarComponent } from '../sidebar/sidebar.component';
 })
 export class PagerComponent {
   open!: boolean; 
+  menu_button = "menu";
 
   handleToogleMenu(): void{
     this.open = this.open == false ? true : false;
+    if(this.open){
+      this.menu_button = "menu_open"
+    }else{
+      this.menu_button = "menu"
+    }
   }
 }

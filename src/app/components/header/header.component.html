@@ -1,6 +1,6 @@
 <div class="header">
     <div class="head-item menu-toggle-button" (click)="handleToogleMenu()">
-        <span class="material-icons">menu</span>
+        <span class="material-icons">{{menu_button}}</span>
     </div>
     <div class="head-item logo">
         <span class="material-icons"><img class="logo-img" src="../../../assets/img/logo.png" alt="Logo"></span> <!-- Replace 'home' with your preferred icon -->
@@ -8,7 +8,7 @@
     <div class="head-item notification">
         <span class="material-icons">notifications</span>
     </div>
-    <div class="head-item profile">
+    <div class="head-item profile" (click)="handleToogleMenu()">
         <span class="material-icons">account_circle</span>
     </div>
 </div>

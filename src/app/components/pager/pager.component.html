@@ -1,5 +1,9 @@
 <div class="container">
-    <app-header (toogleMenu)="handleToogleMenu()"/>
+    <app-header 
+        (toogleMenu)="handleToogleMenu()"
+        [menu_button] ="menu_button"
+    
+    />
     <app-sidebar [open]="open">
         <ng-content #sidebarMainContent></ng-content>        
     </app-sidebar>     
