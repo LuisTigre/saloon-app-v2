@@ -7,5 +7,11 @@ export const routes: Routes = [
             import('./pages/home/home.component').then((c) => c.HomeComponent)
 
     },
+    {
+        path: 'services',
+        loadComponent: () => 
+            import('./pages/menu-service/menu-service.component').then((c) => c.MenuServiceComponent)
+
+    },
     
 ];
