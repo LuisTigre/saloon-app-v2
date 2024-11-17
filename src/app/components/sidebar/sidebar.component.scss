@@ -1,0 +1,25 @@
+:host{
+    
+}
+
+.main {
+  display: flex;
+  height: 100%;
+
+  .sidebar {
+    width: 0;
+    display: flex; 
+    overflow: hidden;
+    transition: width 0.3s ease; 
+
+    &.open {
+      width: 70px; 
+    }
+  }
+
+  .main-content {
+    flex: 1;
+    background-color: grey;
+    transition: margin-left 0.3s ease;
+  }
+}

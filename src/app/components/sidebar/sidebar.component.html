@@ -1,0 +1,10 @@
+<div class="main">
+    <aside class="sidebar" 
+        [class.open]="open"
+        >
+        sidebar
+    </aside>
+    <main class="main-content">
+        <ng-content #sidebarMainContent></ng-content>        
+    </main>
+</div>
