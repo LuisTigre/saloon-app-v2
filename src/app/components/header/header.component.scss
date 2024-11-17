@@ -1,11 +1,13 @@
+@import "../../../styles.scss";
+
 :host{
 
 }
 
-.header{
-    background-color: lightgray;
+.header{ 
     height: 100%;
     display: flex;
+    color: $primary-color;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
@@ -25,4 +27,5 @@
             }
         }
     }
+   
 }

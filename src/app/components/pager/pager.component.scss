@@ -1,13 +1,14 @@
+@import "../../../styles.scss";
 :host{
     
 }
 
 .container{
     display: grid;
-    grid-template-rows: 7dvh auto 8dvh;
+    grid-template-rows: 7dvh 1px auto 8dvh;
     height: 100dvh;
 }
 
-.main{    
-    background-color: antiquewhite;
+.divider{
+    border-bottom: 1px solid $secondary-color;
 }

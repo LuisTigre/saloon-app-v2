@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
 *, html{
     padding: 0;
@@ -5,7 +6,21 @@
 }
 
 
+// COLORS
+$primary-color: #730301;
+$secondary-color: #D58764;
+$text-color: #333;
+$gray: #767676;
+$light-gray: #E4E4E4;
+$light-red: #EB5757;
+$background1: #F9F9F9;
+$unvailable-color: #f5f5f5;
+$dark: #27272A;
 
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { 
+    margin: 0; 
+    font-family: Roboto, "Helvetica Neue", sans-serif; 
+    background-color: $background1;
+}
