@@ -1,9 +1,7 @@
 @import '../../../styles.scss';
 
 :host{
-    width: 100%;
-    height: 5%;
-    box-sizing: border-box;
+   
 }
 
 .timeslot{
@@ -24,16 +22,17 @@
 
     h5{
         text-align: center;
-        padding: 5px;
-        color: $gray;
-        max-height: 5px;
+        color: red;
+        // padding: 5px;
+        // color: $gray;
+        // max-height: 5px;
     }
 
     .slots-wrapper{
         overflow: auto;
         width: 100%;
         height: 100%;
-        padding-right: 100px;
+        // padding-right: 100px;
         display: flex;
         flex-direction: row;
         align-items: center;        
