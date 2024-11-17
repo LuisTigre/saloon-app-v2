@@ -13,5 +13,11 @@ export const routes: Routes = [
             import('./pages/menu-service/menu-service.component').then((c) => c.MenuServiceComponent)
 
     },
+    {
+        path: 'schedule',
+        loadComponent: () => 
+            import('./pages/schedule/schedule.component').then((c) => c.ScheduleComponent)
+
+    },
     
 ];

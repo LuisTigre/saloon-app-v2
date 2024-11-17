@@ -1,0 +1,19 @@
+<h1 mat-dialog-title>{{ data.title }}</h1>
+<div mat-dialog-content>
+  <form [formGroup]="formGroup">
+    <ng-container *ngFor="let field of data.dynamicFields">
+      <app-primary-input
+        [formControlName]="field.name"
+        [type]="field.type"
+        [placeholder]="field.placeholder"
+        [label]="field.label"
+        [inputName]="field.name"
+        [options]="field.options"> <!-- Pass options for radio fields -->
+      </app-primary-input>
+    </ng-container>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="closeDialog()">{{data.primary_action}}</button>
+  <button mat-button [disabled]="formGroup.invalid" (click)="executeEvent()">{{data.secondary_action}}</button>
+</div>

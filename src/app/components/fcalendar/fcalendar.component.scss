@@ -1,0 +1,165 @@
+@import "../../../styles.scss";
+
+:host {
+  display: block;
+  margin: 20px;
+
+
+
+  ::ng-deep .fc .fc-toolbar-title {
+    font-size: 10px;
+    margin: 0px;
+   }
+
+   ::ng-deep .fc {
+    height: 330px;
+   }
+
+  // Style for FullCalendar buttons
+  ::ng-deep .fc .fc-button {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 1.5;
+    padding: 0;  // Added padding for better button size
+    text-align: center;
+    user-select: none;
+    vertical-align: middle;
+    cursor: pointer;     // Add pointer to make buttons interactive
+    transition: background-color 0.3s ease; // Smooth transition effect
+  }
+
+  // Primary button styling (used for active buttons)
+  ::ng-deep .fc .fc-button-primary {
+    background-color: transparent;     // Assuming $primary-color is defined in your styles.scss
+    border: 1px solid $light-gray;
+    padding: 2px 4px;
+    color: $gray;
+
+    &:hover {
+      // background-color:transparent; // Hover effect to darken button
+      color: $secondary-color;
+      font-weight: bold;
+      border-color: #bbb;
+    }
+   
+  }
+
+  ::ng-deep .fc .fc-button-primary:not(:disabled).fc-button-active, .fc .fc-button-primary:not(:disabled):active {
+    background-color: transparent;
+    border-color: #bbb;
+    color: $secondary-color;
+    outline: none;
+    box-shadow: none;
+    font-size: 12px;
+  }
+
+  // Button group styling
+  ::ng-deep .fc .fc-button-group {         // Your requested background color
+    display: inline-flex;
+    flex-direction: row;
+    gap: 5px;
+    vertical-align: middle;
+    border-radius: 0.25em;
+    overflow: hidden;  // Ensure border radius is applied correctly
+  }
+
+  ::ng-deep .fc table {
+    border-collapse: collapse;
+    border-spacing: 0px;
+    font-size: 10px;
+    font-weight: 500;
+ }
+ ::ng-deep .fc .fc-col-header-cell-cushion {
+    display: flex;
+    flex-direction: column;
+    padding: 2px 10px;    
+}
+
+::ng-deep .fc .fc-timegrid-axis-cushion {
+    font-size: 7px;
+    font-weight: bold;
+}
+
+::ng-deep .fc .fc-timegrid-axis-cushion, .fc .fc-timegrid-slot-label-cushion {
+    padding: 0px 4px;
+    // background-color: red;
+}
+
+
+::ng-deep .fc .fc-timegrid-slot-label-cushion::before{
+    // display: inline-block;
+    // white-space: nowrap;
+    // text-align: right;
+    
+}
+
+::ng-deep .fc-daygrid-day-bg .unavailable-day {
+  background-color: #d3d3d3; /* Gray color for unavailable days */
+  opacity: 0.5; /* Optional: To make it similar to the 'today' highlight */
+}
+
+::ng-deep .fc-timegrid-col .unavailable-day {
+  background-color: #d3d3d3;
+  opacity: 0.5;
+}
+
+::ng-deep .fc-day-unavailable {
+  background-color: #d3d3d3 !important; /* Ensure it covers the entire day */
+  opacity: 1;
+}
+
+::ng-deep .fc .fc-day-today {
+  background-color:  rgba(213, 136, 100, 0.123);
+}
+
+::ng-deep .fc-event-title{
+  flex-direction: column;
+  word-wrap: break-word;
+  word-break: break-all; /* Forces text to break wherever necessary */
+}
+
+::ng-deep .event-tray {
+  padding: 10px;
+  background-color: #f4f4f4;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  .external-event {
+    padding: 8px;
+    background-color: #3788d8;
+    color: white;
+    margin-bottom: 5px;
+    cursor: pointer;
+  }
+}
+
+::ng-deep #draggable-el{
+  margin: 3px;
+}
+
+::ng-deep .tray-el{
+  
+  font-size: 11px;
+  padding: 4px;
+  width: 15%;
+  margin: 4px;
+  border: 1px solid $secondary-color;
+  border-radius: 10px;
+  text-align: center;
+}
+&:hover {
+}
+ 
+}
+
+::ng-deep .no-select {
+  user-select: none; /* Standard syntax */
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+}
+

@@ -1,0 +1,13 @@
+@import "../../../styles.scss";
+
+
+.custom-radio-group {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+    align-items: flex-start;
+  }
+  
+  .custom-radio-button {
+    margin: 5px;
+  }

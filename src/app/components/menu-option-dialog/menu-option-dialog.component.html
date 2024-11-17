@@ -1,0 +1,6 @@
+<!-- Trigger hidden, the parent will use it -->
+<button (click)="triggerMenu()" mat-button [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger"></button>
+
+<mat-menu #menu="matMenu">
+  <ng-content></ng-content>
+</mat-menu>

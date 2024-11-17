@@ -1,0 +1,13 @@
+<app-pager>
+    <div class="schedule">
+        <div class="content">
+          <h3>Choose Time</h3>
+          <app-fcalendar>
+          </app-fcalendar>
+    
+          <app-timeslot [schedule]="schedule" [selectedDate]="selectedDate"></app-timeslot>
+          <button  class="continue">Continue</button>     
+        </div>
+        
+      </div>
+</app-pager>

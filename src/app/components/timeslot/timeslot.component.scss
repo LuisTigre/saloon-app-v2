@@ -1,0 +1,83 @@
+@import '../../../styles.scss';
+
+:host{
+    width: 100%;
+    height: 5%;
+    box-sizing: border-box;
+}
+
+.timeslot{
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .5px;
+    // padding: 8px 4px;
+    // border: 1px solid #ddd;
+    box-sizing: border-box;    
+    // background-color: green;
+    width: 90%;
+    height: 35px;
+    max-width: 300px;
+    margin: 0 auto;
+    overflow: hidden;
+
+    h5{
+        text-align: center;
+        padding: 5px;
+        color: $gray;
+        max-height: 5px;
+    }
+
+    .slots-wrapper{
+        overflow: auto;
+        width: 100%;
+        height: 100%;
+        padding-right: 100px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;        
+        gap: 3px;
+        
+
+        .slot{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-direction: row;
+            gap: 1px;
+            height: 100%;
+            font-size: 10px;           
+            min-width: 80px;
+            max-width: 500px;
+            border: .5px solid #ddd;
+            text-align: center;
+            cursor: pointer;
+            border-radius: 5px;
+            // padding: 15px 0px;
+            
+            &.unvailable{
+                background-color: $light-gray;
+                pointer-events: none; // Prevent clicks
+                cursor: default; // Change cursor to default for unclickable cells
+            }
+    
+            &.selected{
+                background-color: $secondary-color;
+                color: white;
+                font-weight: bold;
+            }
+
+            span{                
+                display: flex;
+                align-items: center; 
+                justify-content: center; 
+                text-align: center;
+                width: 100%;
+                height: 100%;
+                
+            }
+        }
+    }
+
+}
