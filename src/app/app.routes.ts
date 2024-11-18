@@ -19,5 +19,11 @@ export const routes: Routes = [
             import('./pages/schedule/schedule.component').then((c) => c.ScheduleComponent)
 
     },
+    {
+        path: 'catalog',
+        loadComponent: () => 
+            import('./pages/catalog/catalog.component').then((c) => c.CatalogComponent)
+
+    },
     
 ];

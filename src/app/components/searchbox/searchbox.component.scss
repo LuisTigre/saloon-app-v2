@@ -1,0 +1,44 @@
+@import "../../../styles.scss";
+:host{
+  
+}
+
+.searchbox{
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  box-sizing: border-box;
+  margin-top: 1.7rem;
+  
+  #category,
+  #search,
+  #search-btn{
+    font-size: .7rem;
+    padding: .3rem .4rem;
+  }
+  #category{
+    background-color: $primary-color;
+    color: white;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+  }
+  #search{
+    background-color: #cccccc28;
+    border-color: #cccccc28;
+    width: 40%;
+
+    &:hover{
+      background-color: #cccccc77;
+      border-color: #cccccc28;
+      outline: transparent;
+    }
+  }
+  
+  #search-btn{
+    background-color: $primary-color;
+    color: white;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+
+}
