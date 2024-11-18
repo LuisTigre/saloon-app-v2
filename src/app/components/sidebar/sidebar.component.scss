@@ -1,3 +1,4 @@
+@import "../../../styles.scss";
 :host{
     
 }
@@ -11,11 +12,44 @@
     display: flex; 
     overflow: hidden;
     transition: width 0.3s ease; 
+    background-color: $primary-color;
 
     &.open {
-      width: 70px; 
-      background-color: #ccc;
+      width: 95px; 
+      height: 99.7%;
     }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+  
+      li {
+          display: flex;
+          align-items: center;
+          margin: 10px 0;
+  
+          a {
+              display: flex;
+              align-items: center;
+              text-decoration: none;
+              color: #fff;
+              padding: 10px 20px;
+              font-size: .5rem;
+              transition: background 0.3s;
+  
+              &:hover {
+                  background-color: #42050586;
+              }
+  
+              .material-icons {
+                  margin-right: 5px;
+                  font-size: 20px;
+              }
+          }
+      }
+  }
+  
   }
 
   .main-content {
