@@ -18,14 +18,14 @@ $unvailable-color: #f5f5f5;
 $dark: #27272A;
 
 
-html, body { height: 100%; }
+html{ height: 100%;}
+html, body { height: 100%;}
 body { 
     margin: 0; 
     font-family: Roboto, "Helvetica Neue", sans-serif; 
-    background-color: $background1;
+    background-color: $background1;    
 }
  a{
     text-decoration: none;
  }
-html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
