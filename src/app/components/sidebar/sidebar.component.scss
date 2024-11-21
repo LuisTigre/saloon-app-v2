@@ -17,10 +17,10 @@
     background-color: $primary-color;
     left: -95px;
     transition: left 0.15s ease; 
+    z-index: 99999999;
     
     &.open {
       width: 95px; 
-      z-index: 99999999;
       display: flex;
       left: 0;
     }
