@@ -3,46 +3,79 @@
         <div class="img-carrossel">            
             <div class="img-wrapper">
                 <img src="../../../assets/img/gallery/braid1.PNG" alt="">
+                <span>
+                    <mat-icon>crop</mat-icon>
+                    <mat-icon>edit</mat-icon>
+                </span>
             </div>
             <div class="paginator"></div>
         </div>
-        <div class="description">
-            <h4 class="title">Butter-fly locs</h4>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+        <div class="head-panel">
+            <div class="description">
+                <span class="editable-item">
+                    <h4 class="title">Butter-fly locs</h4>
+                    <mat-icon>edit</mat-icon>
+                </span>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.<mat-icon>edit</mat-icon></p>                
+            </div>
+            <div class="option-panel">
+                <div class="content">
+                    <a href="/schedule" class="button chooseEvt">Choose Date <mat-icon>event</mat-icon></a>  
+                    <div class="light-switch">
+                        <label for="toggle" class="switch">Editable</label>
+                        <input type="checkbox" id="toggle" />
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="controllers">
             <div class="braid-ops">
-                <select name="style" id="style">
-                    <option value="curly">Curly</option>
-                    <option value="straight">Straight</option>
-                </select>
-                <select name="color" id="color">
-                    <option value="brown">Brown</option>
-                    <option value="black">Black</option>
-                    <option value="golden">Golden</option>
-                </select>
-                <select name="length" id="length">
-                    <option value="long">Long</option>
-                    <option value="medium">Medium</option>
-                    <option value="short">Short</option>
-                </select>
+                <span class="editable-item">
+                    <select name="style" id="style">
+                        <option value="curly">Curly</option>
+                        <option value="straight">Straight</option>
+                    </select>
+                    <mat-icon>edit</mat-icon>
+                </span>
+                <span class="editable-item">
+                    <select name="color" id="color">
+                        <option value="brown">Brown</option>
+                        <option value="black">Black</option>
+                        <option value="golden">Golden</option>
+                    </select>
+                    <mat-icon>edit</mat-icon>
+                </span>
+                <span class="editable-item">
+                    <select name="length" id="length">
+                        <option value="long">Long</option>
+                        <option value="medium">Medium</option>
+                        <option value="short">Short</option>
+                    </select>
+                    <mat-icon>edit</mat-icon>
+                </span>
             </div>
             <div class="metrics">
-               <div class="duration">
-                <span>Duration:</span> 4h 3min 
-               </div>    
-               
-               <div class="datime">
-                <span>Date:</span> Oct 12, 2018 9:00
-               </div> 
-               <div class="price">
-                <span>Price:</span> PLN 400
-               </div>
-               <a href="/schedule" class="button chooseEvt"> Choose date <mat-icon>event</mat-icon></a>                 
+                <div class="content">
+                    <div class="duration editable-item">
+                     <span>Duration:</span> 4h 3min 
+                     <mat-icon>edit</mat-icon>
+                    </div>    
+                    
+                    <div class="datime editable-item">
+                     <span>Date:</span> Oct 12, 2018 <mat-icon>event</mat-icon>
+                    </div> 
+                    <div class="time editable-item">
+                     <span>Time:</span> 9:00 AM <mat-icon>alarm</mat-icon>
+                    </div>
+                    <div class="price editable-item">
+                     <span>Price:</span> PLN 400
+                     <mat-icon>edit</mat-icon>
+                    </div>                                           
+                </div>
             </div>
         </div>
         <div class="actions">
-            <a href="/catalog" class="button">Menu</a>
+            <a class="button">Customize</a>
             <a class="button continue">Continue</a>
         </div>
     </div>
