@@ -8,15 +8,21 @@
   height: 100%;
 
   .sidebar {
-    width: 0;
+    width: 95px;
+    height: 84.5%;
+    box-sizing: content-box;
     display: flex; 
+    position: absolute;
     overflow: hidden;
-    transition: width 0.3s ease; 
     background-color: $primary-color;
-
+    left: -95px;
+    transition: left 0.15s ease; 
+    
     &.open {
       width: 95px; 
-      height: 99.7%;
+      z-index: 99999999;
+      display: flex;
+      left: 0;
     }
 
     nav ul {
