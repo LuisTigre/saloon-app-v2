@@ -6,26 +6,36 @@
 
 .header{ 
     height: 100%;
+    min-height: 45px;
+    max-height: 70px;
     width: 100%;
     min-width: inherit;
-    display: flex;
-    color: $primary-color;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 1rem;
     box-sizing: border-box;
+    border-bottom: 1px solid $secondary-color;
 
-    .head-item{
-        margin: 0 .1rem;
+    .content{
+        height: 100%;
+        height: 100%;
 
-        &.logo{
-            flex:1;
-            span{
-                
-                img{
-                    width: 80px;
-                    height: 24px;                    
+        display: flex;
+        color: $primary-color;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 1rem;
+        box-sizing: border-box;
+    
+        .head-item{
+            margin: 0 .1rem;
+    
+            &.logo{
+                flex:1;
+                span{
+                    
+                    img{
+                        width: 80px;
+                        height: 24px;                    
+                    }
                 }
             }
         }

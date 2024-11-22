@@ -5,11 +5,8 @@
 
 .container{
     display: grid;
-    grid-template-rows: 7dvh 1px auto 8dvh;
+    grid-template-rows: minmax(48px,7dvh)  auto minmax(60px,8dvh);
     height: 100dvh;
     min-width: 308px;
-}
-
-.divider{
-    border-bottom: 1px solid $secondary-color;
+    gap: 1px;
 }

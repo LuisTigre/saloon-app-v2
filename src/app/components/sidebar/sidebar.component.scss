@@ -6,7 +6,8 @@
 .main {
   display: flex;
   height: 100%;
-
+  min-height: 500px;
+  
   .sidebar {
     width: 95px;
     height: 84.5%;
@@ -29,12 +30,12 @@
       list-style: none;
       padding: 0;
       margin: 0;
-  
+      
       li {
           display: flex;
           align-items: center;
           margin: 10px 0;
-  
+          
           a {
               display: flex;
               align-items: center;
@@ -45,21 +46,21 @@
               transition: background 0.3s;
   
               &:hover {
-                  background-color: #42050586;
+                background-color: #42050586;
               }
   
               .material-icons {
                   margin-right: 5px;
                   font-size: 20px;
+                }
               }
-          }
       }
   }
   
-  }
+}
 
-  .main-content {
-    flex: 1;
-    transition: margin-left 0.3s ease;
-  }
+.main-content {
+  flex: 1;
+  transition: margin-left 0.3s ease;
+}
 }
