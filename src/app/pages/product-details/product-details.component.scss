@@ -1,7 +1,7 @@
 @import "../../../styles.scss";
 
 $side-padding: 20px;
-$font-size: .8rem;
+$font-size: 1rem;
 :host{
     width: 100%;
 
@@ -14,6 +14,7 @@ $font-size: .8rem;
     justify-content: space-between;
     flex-direction: column;
     gap: 5px;
+    font-size: $font-size;
 
     .img-carrossel{
         width: 100%;
@@ -80,12 +81,13 @@ $font-size: .8rem;
         justify-content: space-between;
         align-items: center;
         padding: 0 $side-padding;
+        font-size: $font-size;
         // background-color: #ccc;
         box-sizing: border-box;
         
         .description{
             width: 50%;
-            font-size: $font-size;
+            font-size: inherit;
             .title{
                 font-weight: 500;
                 max-width: 140px; 
@@ -97,9 +99,9 @@ $font-size: .8rem;
             }
             p{
                 width: 100%;
-                line-height: 1rem;
+                line-height: 1.3rem;
                 font-size: 85%;
-                max-width: 140px; 
+                max-width: 150px; 
                 max-height: 35px;
     
                 .mat-icon{
@@ -124,14 +126,14 @@ $font-size: .8rem;
             // background-color: green;
             
             .content{
-                gap: 3px;
+                gap: 6px;
                 width: fit-content;
                 align-items: flex-end;
                 // background-color: yellow;
                 display: flex;
             }
             .light-switch, .button{
-                font-size: calc($font-size - 35%);
+                font-size: 70%;
 
             }
             
@@ -145,6 +147,7 @@ $font-size: .8rem;
     .controllers{
         display: flex;
         flex-direction: row;
+        height: 15%;
         width: 100%;
         justify-content: space-between;
         
@@ -152,6 +155,7 @@ $font-size: .8rem;
             display: flex;
             flex-direction: column;
             width: 50%;
+            height: 100%;
             padding: 0 $side-padding;
             justify-content: space-between;            
 
@@ -161,7 +165,7 @@ $font-size: .8rem;
                 border-color: #cccccc57;
                 background-color: transparent;
                 border-radius: 3px;
-                font-size: $font-size;
+                font-size: inherit;
 
                 :hover{
                     border-color: $primary-color;
@@ -172,15 +176,19 @@ $font-size: .8rem;
         .metrics{
             display: flex;
             width: 50%;
+            height: 100%;
             flex-direction: column;
             align-items: flex-end;
-            font-size: $font-size;
-            padding-right: $side-padding;
-
+            font-size: inherit;
+            padding-right: $side-padding;            
 
             .content{
+                display: flex;
+                flex-direction: column;
                 justify-self: flex-end;
+                justify-content: space-between;
                 width: fit-content;
+                height: 100%;
 
                 span{
                     font-weight: 700;
@@ -246,7 +254,7 @@ $font-size: .8rem;
         gap: .3rem;
         align-items: center;
         justify-content: center;
-        font-size: $font-size;
+        font-size: inherit;
         padding: 0 .2rem;
         border: .5px solid $secondary-color;
         border-radius: 3px;
@@ -264,21 +272,23 @@ $font-size: .8rem;
 }
 
 
-// @media screen and 
-// (min-height: 1180px) , 
-// (device-height: 1180px), 
-// (device-height: 1280px),
-// (device-height: 1366px)
+@media screen and 
+(min-height: 1180px) , 
+(device-height: 1180px), 
+(device-height: 1280px)
 
-// {
+{
 
-//     .product-details{
-//         margin-top: 3%;
-//     }
+    .product-details{
+        font-size: 1.5rem;
+     }
     
-// }
+}
 
-@media screen and (max-width: 280px){
+@media screen and (max-width: 380px){
+    .product-details{
+        font-size: .8rem;
+     }
     .option-panel{
         .content{
             flex-direction: column;
