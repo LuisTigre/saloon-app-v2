@@ -1,0 +1,42 @@
+@import "../../../styles.scss";
+
+:host{
+
+}
+
+.bookings{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    font-size: $font-size;
+
+    .booking-menu{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 8%;
+        width: 100%;
+
+        .content{
+            width: fit-content;
+            max-width: 300px;
+            gap: .2rem;
+            padding-bottom: .3rem;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 70%;
+            overflow: auto;
+            box-sizing: border-box;
+            
+            .menu-item{
+                width: fit-content;
+                border: .3px solid #ccc;
+                padding: 0 .3rem;        
+                text-wrap: nowrap;            
+            }
+        }
+    }
+
+}

@@ -160,14 +160,15 @@ $font-size: 1rem;
             justify-content: space-between;            
 
             select{
+                border: none;
+                padding: .1rem;
+                appearance: none;
                 width: 60%;
                 margin-bottom: 4px;
-                border-color: #cccccc57;
-                background-color: transparent;
-                border-radius: 3px;
+                background-color: #cccccc18;
                 font-size: inherit;
-
-                :hover{
+                
+                option{
                     border-color: $primary-color;
                 }
             }
