@@ -1,9 +1,40 @@
 <app-pager>
     <div class="bookings">
-        <div class="booking-menu">
-            <div class="content">
-                <div class="menu-item" *ngFor="let item of menu">{{item}}</div>
-            </div>
+      <div class="booking-menu">
+        <div class="content">
+          <div class="menu-item" *ngFor="let item of menu">{{ item }}</div>
         </div>
+      </div>
+      <div class="table-content">
+        <table>
+          <tbody>
+            <tr *ngFor="let booking of bookings">
+              <td class="table-item-td">
+                <div class="table-item">
+                  <div class="date">{{ booking.date }}, at {{ booking.time }}</div>
+                  <div class="product">
+                    {{ booking.service.name }}; {{ booking.service.length }}; 
+                    {{ booking.service.color }}; {{ booking.service.style }}
+                  </div>
+                  <div class="info">
+                    <div class="notification">{{ booking.status }}</div>
+                    <div class="price">{{ booking.amount }}</div>
+                  </div>
+                </div>
+              </td>
+              <td class="table-action-td">
+                <div class="icon">
+                  <svg width="5" height="21" viewBox="0 0 5 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="2.5" cy="2.5" r="2.5" fill="#767676" />
+                    <circle cx="2.5" cy="18.5" r="2.5" fill="#767676" />
+                    <circle cx="2.5" cy="10.5" r="2.5" fill="#767676" />
+                  </svg>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-</app-pager>
+  </app-pager>
+  
