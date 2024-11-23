@@ -5,14 +5,14 @@
 }
 
 .bookings{
-
+    
     display: flex;
     width: 100%;
     height: 100%;
     font-size: $font-size;
     flex-direction: column;
     align-items: center;
-    gap: 3px;
+    gap: 8px;
     
     .title{
         width: 100%;
@@ -23,9 +23,8 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 8%;
+        height: 4%;
         width: 100%;
-
 
         .content{
             width: fit-content;
@@ -54,11 +53,11 @@
         min-width: 300px;
         width: 90%;
         height: 80%;
+        display: grid;
+        grid-template-rows:minmax(100%, 450px);
         overflow-y: auto;
-        padding: 0 1rem;
-        box-sizing: border-box;
-        justify-content: center;
-        align-items: center;        
+        padding: 0 1rem;      
+        box-sizing: border-box;            
 
         table{
             width: 100%;
@@ -71,6 +70,7 @@
                 
                 .date{
                     color: rgba(0, 0, 0, 0.829);
+                    font-size: 85%;
                 }
                 .product{
                     font-weight: 500;
