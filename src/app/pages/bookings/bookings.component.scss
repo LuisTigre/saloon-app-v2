@@ -18,13 +18,14 @@
         width: 100%;
         text-align: center;
         padding-top: .7rem;
+        color: $primary-color;
     }
     .booking-menu{
         display: flex;
         justify-content: center;
         align-items: center;
         height: 4%;
-        width: 100%;
+        width: 85%;
 
         .content{
             width: fit-content;

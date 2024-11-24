@@ -12,11 +12,13 @@ import { MatIcon } from '@angular/material/icon';
 })
 export class BookingsComponent {
   menu: string[] = [
-    'All',
-    'Pending',
-    'To Pay',
-    'Canceled',
-    'To be Rated',
+    'In Progress',
+    'Awaiting Confirmation',
+    'No Show',
+    'Rescheduled',
+    'Expired',
+    'Completed',
+    'Refunded',
   ];
 
   bookings = [
