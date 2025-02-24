@@ -1,82 +1,79 @@
-<app-pager>
+<app-pager *ngIf="braidStyle">
     <div class="product-details">
-        <div class="img-carrossel">            
-            <div class="img-wrapper">
-                <img src="../../../assets/img/gallery/braid1.PNG" alt="">
-                <span>
-                    <mat-icon>crop</mat-icon>
-                    <mat-icon>edit</mat-icon>
-                </span>
-            </div>
-            <div class="paginator"></div>
+      <!-- Image Carousel -->
+      <div class="img-carrossel">            
+        <div class="img-wrapper">
+          <img [src]="braidStyle.imageUrl" alt="{{ braidStyle.title }}">
+          <span>
+            <mat-icon>crop</mat-icon>
+            <mat-icon>edit</mat-icon>
+          </span>
         </div>
-        <div class="head-panel">
-            <div class="description">
-                <span class="editable-item">
-                    <h4 class="title">Butter-fly locs</h4>
-                    <mat-icon>edit</mat-icon>
-                </span>
-                <p>Lorem ipsum dolor sit amet adipisicing elit.<mat-icon>edit</mat-icon></p>                
-            </div>
-            <div class="option-panel">
-                <div class="content">
-                    <a href="/schedule" class="button chooseEvt">Choose Date <mat-icon>event</mat-icon></a>  
-                    <div class="light-switch">
-                        <label for="toggle" class="switch">Editable</label>
-                        <input type="checkbox" id="toggle" />
-                    </div>
-                </div>
-            </div>
+        <div class="paginator"></div>
+      </div>
+  
+      <!-- Head Panel -->
+      <div class="head-panel">
+        <div class="description">
+          <span class="editable-item">
+            <h4 class="title">{{ braidStyle.title }}</h4>
+            <mat-icon>edit</mat-icon>
+          </span>
+          <p class="description">
+            {{ braidStyle.description }}
+            <mat-icon>edit</mat-icon>
+          </p>                
         </div>
-        <div class="controllers">
-            <div class="braid-ops">
-                <span class="editable-item">
-                    <select name="style" id="style">
-                        <option value="curly">Curly</option>
-                        <option value="straight">Straight</option>
-                    </select>
-                    <mat-icon>edit</mat-icon>
-                </span>
-                <span class="editable-item">
-                    <select name="color" id="color">
-                        <option value="brown">Brown</option>
-                        <option value="black">Black</option>
-                        <option value="golden">Golden</option>
-                    </select>
-                    <mat-icon>edit</mat-icon>
-                </span>
-                <span class="editable-item">
-                    <select name="length" id="length">
-                        <option value="long">Long</option>
-                        <option value="medium">Medium</option>
-                        <option value="short">Short</option>
-                    </select>
-                    <mat-icon>edit</mat-icon>
-                </span>
+  
+        <div class="option-panel">
+          <div class="content">
+            <a href="/schedule" class="button chooseEvt">Choose Date <mat-icon>event</mat-icon></a>  
+            <div class="light-switch">
+              <label for="toggle" class="switch">Editable</label>
+              <input type="checkbox" id="toggle" [checked]="braidStyle.editable" />
             </div>
-            <div class="metrics">
-                <div class="content">
-                    <div class="duration editable-item">
-                     <span>Duration:</span> 4h 3min 
-                     <mat-icon>edit</mat-icon>
-                    </div>    
-                    
-                    <div class="datime editable-item">
-                     <span>Date:</span> Oct 12, 2018 <mat-icon>event</mat-icon>
-                    </div> 
-                    <div class="time editable-item">
-                     <span>Time:</span> 9:00 AM <mat-icon>alarm</mat-icon>
-                    </div>
-                    <div class="price editable-item">
-                     <span>Price:</span> PLN 400
-                     <mat-icon>edit</mat-icon>
-                    </div>                                           
-                </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Controllers -->
+      <div class="controllers">
+        <div class="braid-ops">
+          <span *ngFor="let attribute of braidStyle.stylesAtribues" class="editable-item">
+            <label>{{ attribute.name }}:</label>
+            <select>
+              <option *ngFor="let value of attribute.value.split(', ')" [value]="value">{{ value }}</option>
+            </select>
+            <mat-icon>edit</mat-icon>
+          </span>
+        </div>
+  
+        <div class="metrics">
+          <div class="content">
+            <div class="duration editable-item">
+              <span>Duration:</span> {{ braidStyle.duration }} min 
+              <mat-icon>edit</mat-icon>
+            </div>    
+  
+            <div class="datime editable-item">
+              <span>Date:</span> {{ braidStyle.date }} <mat-icon>event</mat-icon>
+            </div> 
+            <div class="time editable-item">
+              <span>Time:</span> {{ braidStyle.time }} <mat-icon>alarm</mat-icon>
             </div>
+            <div class="price editable-item">
+              <span>Price:</span> PLN {{ braidStyle.price }}
+              <mat-icon>edit</mat-icon>
+            </div>                                           
+          </div>
         </div>
-        <div class="actions">
-            <a class="button">Customize</a>
-            <a href="/bookings" class="button continue">Continue</a>
-        </div>
+      </div>
+  
+      <!-- Actions -->
+      <div class="actions">
+        <a class="button">Customize</a>
+        <a href="/bookings" class="button continue">Continue</a>
+      </div>
     </div>
-</app-pager>
+  </app-pager>
+  

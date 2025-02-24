@@ -11,7 +11,8 @@
                 <li><a href="/clients"><span class="material-icons">people</span> Clients</a></li>
                 <li><a href="#"><span class="material-icons">bar_chart</span> Reports</a></li>
                 <li><a href="#"><span class="material-icons">settings</span> Settings</a></li>
-                <li><a href="#"><span class="material-icons">logout</span> Logout</a></li>
+                <li *ngIf="isLoggedIn$ | async"><a href="#" (click)="handleLogout()"><span class="material-icons">logout</span> Logout</a></li>
+
             </ul>
         </nav>
     </aside>

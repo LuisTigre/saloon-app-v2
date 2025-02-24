@@ -1,6 +1,6 @@
 <div class="header">
     <div class="content">
-        <div class="head-item menu-toggle-button" (click)="handleToogleMenu()">
+        <div class="head-item menu-toggle-button" (click)="handleToggleMenu()">
             <span class="material-icons">{{menu_button}}</span>
         </div>
         <div class="head-item logo">
@@ -9,7 +9,10 @@
         <div class="head-item notification">
             <span class="material-icons">notifications</span>
         </div>
-        <div class="head-item profile" (click)="handleToogleMenu()">
+        <div *ngIf="(isLoggedIn$ | async) === true" class="head-item profile" (click)="handleToggleMenu()">
+            <span class="material-icons">account_circle</span>
+        </div>
+        <div *ngIf="(isLoggedIn$ | async) === false" class="head-item profile" (click)="handleSubscription()">
             <span class="material-icons">account_circle</span>
         </div>
     </div>

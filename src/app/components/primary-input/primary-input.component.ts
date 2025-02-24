@@ -36,6 +36,7 @@ export class PrimaryInputComponent implements ControlValueAccessor {
   @Input() label: string = "";
   @Input() inputName: string = "";
   @Input() options: { value: string; label: string }[] = []; // New input for radio options
+  
 
   value: string = '';
   onChange: any = () => {}

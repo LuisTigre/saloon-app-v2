@@ -25,77 +25,77 @@ export class ClientsComponent {
     {
       "name": "Zanda Zakwisha",
       "country": "USA",
-      "src": "https://plus.unsplash.com/photo-1?q=80&w=1470&auto=format&fit=crop"
+      "src": "https://plus.unsplash.com/premium_photo-1690579805273-fd0c7b08035d?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     },
     {
       "name": "Liam Thompson",
       "country": "USA",
-      "src": "https://plus.unsplash.com/photo-2?q=80&w=1470&auto=format&fit=crop"
+      "src": ""
     },
     {
       "name": "Sophia Smith",
       "country": "USA",
-      "src": "https://plus.unsplash.com/photo-3?q=80&w=1470&auto=format&fit=crop"
+      "src": ""
     },
     {
       "name": "Oliver Johnson",
       "country": "USA",
-      "src": "https://plus.unsplash.com/photo-4?q=80&w=1470&auto=format&fit=crop"
+      "src": ""
     },
     {
       "name": "Krzysztof Kowalski",
       "country": "Poland",
-      "src": "https://plus.unsplash.com/photo-5?q=80&w=1470&auto=format&fit=crop"
+      "src": ""
     },
     {
       "name": "Anna Nowak",
       "country": "Poland",
-      "src": "https://plus.unsplash.com/photo-6?q=80&w=1470&auto=format&fit=crop"
+      "src": ""
     },
     {
       "name": "Jean Nkurunziza",
       "country": "Rwanda",
-      "src": "https://plus.unsplash.com/photo-7?q=80&w=1470&auto=format&fit=crop"
+      "src": ""
     },
     {
       "name": "Aline Uwase",
       "country": "Rwanda",
-      "src": "https://plus.unsplash.com/photo-8?q=80&w=1470&auto=format&fit=crop"
+      "src": ""
     },
     {
       "name": "Eric Mugisha",
       "country": "Rwanda",
-      "src": "https://plus.unsplash.com/photo-9?q=80&w=1470&auto=format&fit=crop"
+      "src": ""
     },
     {
       "name": "Chidera Okafor",
       "country": "Nigeria",
-      "src": "https://plus.unsplash.com/photo-10?q=80&w=1470&auto=format&fit=crop"
+      "src": ""
     },
     {
       "name": "Fatima Ahmed",
       "country": "Sudan",
-      "src": "https://plus.unsplash.com/photo-11?q=80&w=1470&auto=format&fit=crop"
+      "src": ""
     },
     {
       "name": "Diana Njoroge",
       "country": "Kenya",
-      "src": "https://plus.unsplash.com/photo-12?q=80&w=1470&auto=format&fit=crop"
+      "src": ""
     },
     {
       "name": "Lucas Bakari",
       "country": "Tanzania",
-      "src": "https://plus.unsplash.com/photo-13?q=80&w=1470&auto=format&fit=crop"
+      "src": ""
     },
     {
       "name": "Abdulaye Diallo",
       "country": "Senegal",
-      "src": "https://plus.unsplash.com/photo-14?q=80&w=1470&auto=format&fit=crop"
+      "src": ""
     },
     {
       "name": "Marie-Louise Mbemba",
       "country": "Congo",
-      "src": "https://plus.unsplash.com/photo-15?q=80&w=1470&auto=format&fit=crop"
+      "src": ""
     }
   ]
   

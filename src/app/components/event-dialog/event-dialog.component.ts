@@ -8,6 +8,8 @@ import { PrimaryInputComponent } from '../primary-input/primary-input.component'
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';  // Import CommonModule
 import {MatButtonModule} from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+
 
 @Component({
   selector: 'app-event-dialog',
@@ -20,7 +22,8 @@ import {MatButtonModule} from '@angular/material/button';
     PrimaryInputComponent,
     ReactiveFormsModule,
     CommonModule,
-    MatButtonModule
+    MatButtonModule,
+    MatIconModule
   ],
   providers: [
     {
@@ -39,7 +42,7 @@ export class EventDialogComponent {
   @Input() header = ""
   @Output() saveAction = new EventEmitter();  
   @Input() primary_action: string = ""
-  @Input() secondary_action: string = ""
+  @Input() secondary_action: string = ""  
 
   constructor(
     private fb: FormBuilder,
@@ -66,7 +69,12 @@ export class EventDialogComponent {
   }
 
   executeEvent(): void {
-    // Close dialog and return the event data
-    this.dialogRef.close(this.data);
+    if (this.formGroup.valid) {
+      this.dialogRef.close(this.formGroup.value);
+    } else {
+      // Handle form validation errors if needed
+    }
   }
+
+ 
 }

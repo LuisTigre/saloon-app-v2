@@ -18,5 +18,9 @@ export class HomeComponent {
   handleToogleMenu(): void{
     this.toogleMenu.emit(open);
   }
+  
+  hasRole(role: string): boolean {
+    return sessionStorage.getItem("user-role") == role;
+  }
 
 }

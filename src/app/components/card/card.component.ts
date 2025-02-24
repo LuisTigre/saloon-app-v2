@@ -3,6 +3,7 @@ import { Component, Input, Type } from '@angular/core';
 import { SearchboxComponent } from "../searchbox/searchbox.component";
 
 export interface Card {
+  id: number;
   img: string;
   title: string;
 }

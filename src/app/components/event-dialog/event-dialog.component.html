@@ -1,19 +1,31 @@
-<h1 mat-dialog-title>{{ data.title }}</h1>
-<div mat-dialog-content>
-  <form [formGroup]="formGroup">
-    <ng-container *ngFor="let field of data.dynamicFields">
-      <app-primary-input
-        [formControlName]="field.name"
-        [type]="field.type"
-        [placeholder]="field.placeholder"
-        [label]="field.label"
-        [inputName]="field.name"
-        [options]="field.options"> <!-- Pass options for radio fields -->
-      </app-primary-input>
+<div class="modal">
+  <div class="modal-header">
+    <h1 mat-dialog-title>{{ data.title }}</h1>
+    <button mat-icon-button class="close-button" (click)="closeDialog()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div class="modal-body" mat-dialog-content>
+    <form [formGroup]="formGroup">
+      <ng-container *ngFor="let field of data.dynamicFields">
+        <app-primary-input
+          [formControlName]="field.name"
+          [type]="field.type"
+          [placeholder]="field.placeholder"
+          [label]="field.label"
+          [inputName]="field.name"
+          [options]="field.options"> <!-- Pass options for radio fields -->
+        </app-primary-input>
+      </ng-container>
+    </form>
+  </div>
+  <div mat-dialog-actions class="bottom-btn">
+    <ng-container *ngFor="let button of data.buttons">
+      <button mat-button
+              [disabled]="button.disabled ? formGroup.invalid : false"
+              (click)="button.action()">
+        {{ button.text }}
+      </button>
     </ng-container>
-  </form>
-</div>
-<div mat-dialog-actions>
-  <button mat-button (click)="closeDialog()">{{data.primary_action}}</button>
-  <button mat-button [disabled]="formGroup.invalid" (click)="executeEvent()">{{data.secondary_action}}</button>
+  </div>  
 </div>

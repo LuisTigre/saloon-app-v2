@@ -1,0 +1,100 @@
+:host{
+    
+}
+
+.modal{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; 
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;  
+
+    .modal-header{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        height: 60px;
+        margin: 0px;
+        box-sizing: border-box;
+
+        h2{
+            margin: 0;
+            font-size: 4rem;
+        }
+
+        .close{
+            cursor: pointer;
+            font-size: 4rem;
+        }
+    }
+
+    .modal-body{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        margin: 0px;
+        box-sizing: border-box;
+
+        .form{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+            margin: 0px;
+            box-sizing: border-box;
+
+            .form-group{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                width: 100%;
+                height: 100%;
+                margin: 0px;
+                box-sizing: border-box;
+
+                label{
+                    font-size: 2rem;
+                }
+
+                input{
+                    width: 100%;
+                    height: 40px;
+                    margin: 10px 0px;
+                    padding: 5px;
+                    box-sizing: border-box;
+                }
+
+                textarea{
+                    width: 100%;
+                    height: 100px;
+                    margin: 10px 0px;
+                    padding: 5px;
+                    box-sizing: border-box;
+                }
+                
+                
+            }
+        }   
+    }
+    .mdc-dialog__actions{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+       
+        
+        button{
+            
+        }
+    }
+}

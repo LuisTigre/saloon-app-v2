@@ -45,6 +45,9 @@
                 width: 100%;
                 
                 .profile-picture{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
                     width: 20%;
                     height: 40px;
                     img{

@@ -1,7 +1,9 @@
 <div class="container">
     <app-header 
-        (toogleMenu)="handleToogleMenu()"
-        [menu_button] ="menu_button"    
+        (toggleMenu)="handleToggleMenu()"
+        (Subscription)="openSubscriptionDialog()"
+        [menu_button] ="menu_button" 
+
     />    
     <app-sidebar [open]="open">
         <ng-content #sidebarMainContent></ng-content>        
