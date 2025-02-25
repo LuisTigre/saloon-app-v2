@@ -20,17 +20,18 @@ export class ProductDetailsComponent {
   ngOnInit(): void {
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get('brast');
-
+  
     if (id) {
       this.braidingStylesService.getBraidingStyleDetail(id).subscribe({
         next: (response: any) => {
-          console.log('Braiding styles fetched:', response);
+          console.log('Braiding style fetched:', response);
           this.braidStyle = response; // Store the fetched data
         },
-        error: (error: any) => console.error('Failed to fetch braiding styles:', error),
+        error: (error: any) => console.error('Failed to fetch braiding style:', error),
       });
     } else {
       console.error('No braiding style ID found in URL');
     }
   }
+  
 }

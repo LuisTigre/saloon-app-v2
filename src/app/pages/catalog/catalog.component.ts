@@ -22,15 +22,16 @@ export class CatalogComponent implements OnInit {
 
   ngOnInit(): void {
     this.braidingStylesService.getBraidingStyles().subscribe({
-      next: (response: any) => {
+      next: (response: any[]) => {
         console.log('Braiding styles fetched:', response);
         this.cards = response.map((style: any) => ({
           id: style.id,
-          img: style.image == '' ? this.def_img : style.image,
-          title: style.name
+          img: style.images && style.images.length > 0 ? style.images[0].image_url : this.def_img,
+          title: style.style_name
         }));
       },
       error: (error: any) => console.error('Failed to fetch braiding styles:', error),
     });
   }
 }
+
