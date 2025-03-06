@@ -2,10 +2,12 @@ import { Component, Input, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule, FormsModule } from '@angular/forms'; 
 import { MatFormFieldModule } from '@angular/material/form-field'; 
 import { MatInputModule } from '@angular/material/input'; 
-import { MatRadioModule } from '@angular/material/radio'; // Import MatRadioModule
+import { MatRadioModule } from '@angular/material/radio'; 
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
 import { CommonModule } from '@angular/common';
 
-type InputTypes = "text" | "email" | "password" | "radio"; // Added "radio" type
+type InputTypes = "text" | "email" | "password" | "radio" | "textarea" | "select"; // Added "select"
 
 @Component({
   selector: 'app-primary-input',
@@ -14,7 +16,9 @@ type InputTypes = "text" | "email" | "password" | "radio"; // Added "radio" type
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatRadioModule, // Add MatRadioModule to imports
+    MatRadioModule,
+    MatSelectModule, // Added MatSelectModule
+    MatOptionModule, // Added MatOptionModule
     FormsModule,
     CommonModule
   ],
@@ -26,8 +30,7 @@ type InputTypes = "text" | "email" | "password" | "radio"; // Added "radio" type
     }
   ],
   templateUrl: './primary-input.component.html',
-  styleUrls: ['./primary-input.component.scss' // Fixed "styleUrl" to "styleUrls"
-  ]
+  styleUrls: ['./primary-input.component.scss']
 })
 export class PrimaryInputComponent implements ControlValueAccessor {
 
@@ -35,12 +38,11 @@ export class PrimaryInputComponent implements ControlValueAccessor {
   @Input() placeholder: string = "";
   @Input() label: string = "";
   @Input() inputName: string = "";
-  @Input() options: { value: string; label: string }[] = []; // New input for radio options
-  
+  @Input() options: { value: string; label: string }[] = []; // Used for radio and select
 
   value: string = '';
-  onChange: any = () => {}
-  onTouched: any = () => {}
+  onChange: any = () => {};
+  onTouched: any = () => {};
 
   onInput(event: Event) {
     const value = (event.target as HTMLInputElement).value;

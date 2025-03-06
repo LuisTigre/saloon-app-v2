@@ -1,19 +1,28 @@
-<mat-form-field appearance="fill" *ngIf="type !== 'radio'">
-    <mat-label>{{ label }}</mat-label>
-    <input 
-      [type]="type" 
-      [placeholder]="placeholder" 
-      [(ngModel)]="value" 
-      (input)="onInput($event)" 
-      (blur)="onTouched()" 
-      matInput 
-    />
+<mat-form-field appearance="fill" *ngIf="type !== 'radio' && type !== 'select'">
+  <mat-label>{{ label }}</mat-label>
+  <input 
+    [type]="type" 
+    [placeholder]="placeholder" 
+    [(ngModel)]="value" 
+    (input)="onInput($event)" 
+    (blur)="onTouched()" 
+    matInput 
+  />
+</mat-form-field>
+
+<mat-form-field appearance="fill" *ngIf="type === 'select'">
+  <mat-label>{{ label }}</mat-label>
+  <mat-select [(ngModel)]="value" (selectionChange)="onChange($event.value)">
+    <mat-option *ngFor="let option of options" [value]="option.value">
+      {{ option.label }}
+    </mat-option>
+  </mat-select>
 </mat-form-field>
 
 <div *ngIf="type === 'radio'">
   <label>{{ label }}</label>
   <mat-radio-group class="custom-radio-group" [(ngModel)]="value" (change)="onChange(value)">
-    <mat-radio-button class="custom-radio-button"  *ngFor="let option of options" [value]="option.value">
+    <mat-radio-button class="custom-radio-button" *ngFor="let option of options" [value]="option.value">
       {{ option.label }}
     </mat-radio-button>
   </mat-radio-group>
