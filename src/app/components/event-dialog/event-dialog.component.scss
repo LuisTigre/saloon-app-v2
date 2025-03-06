@@ -42,7 +42,7 @@
         margin: 0px;
         box-sizing: border-box;
 
-        .form{
+        form{
             display: flex;
             justify-content: center;
             align-items: center;
@@ -51,6 +51,10 @@
             height: 100%;
             margin: 0px;
             box-sizing: border-box;
+
+            &.mat-mdc-form-field {
+                width: 100%;
+            }
 
             .form-group{
                 display: flex;
@@ -97,4 +101,6 @@
             
         }
     }
+
+    
 }
