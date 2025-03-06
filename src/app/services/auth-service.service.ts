@@ -7,7 +7,9 @@ import { BehaviorSubject, Observable, tap } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl: string = 'http://localhost:8000/api';
+  private apiUrl: string = `http://${
+    window.location.hostname || 'localhost'
+  }:8000/api`;
 
   // BehaviorSubject to track login state
   private loggedIn = new BehaviorSubject<boolean>(this.hasSession());
@@ -50,7 +52,7 @@ export class AuthService {
         email,
         password,
         password_confirmation,
-        role
+        role,
       })
       .pipe(
         tap((response) => {
@@ -97,7 +99,7 @@ export class AuthService {
     return this.loggedIn.getValue();
   }
 
-  hasRole(): string | null {
-    return sessionStorage.getItem('user-role') || null;
+  hasRole(role: string): boolean {
+    return sessionStorage.getItem('user-role') == role;
   }
 }
