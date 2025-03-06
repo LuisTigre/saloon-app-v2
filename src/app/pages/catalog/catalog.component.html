@@ -1,6 +1,7 @@
 <app-pager>
     <div class="catalog">
-        <app-searchbox/>
+        <app-searchbox/>        
+            <button (click)="this.openModal()" id="add-btn"><app-add-button/></button>        
         <app-card [data]="cards" />
     </div>
 </app-pager>
