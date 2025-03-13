@@ -91,6 +91,8 @@ export class AuthService {
         },
         error: (error) => {
           console.error('Logout error:', error); // Log the error for debugging
+          sessionStorage.removeItem('auth-token');
+          sessionStorage.removeItem('user-role');
         },
       });
   }
