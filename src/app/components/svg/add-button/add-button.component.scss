@@ -1,8 +1,8 @@
 @import "../../../../styles.scss";
 
 svg {
-    width: 50px; /* Adjust size */
-    height: 50px;
+    // width: 50px; /* Adjust size */
+    // height: 50px;
     stroke: $primary-color; /* Default stroke color */
     transition: stroke 0.3s ease, transform 0.3s ease;
 }

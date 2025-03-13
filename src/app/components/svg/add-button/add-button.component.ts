@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-add-button',
@@ -9,4 +9,6 @@ import { Component } from '@angular/core';
 })
 export class AddButtonComponent {
 
+  @Input() width: number = 24;
+  @Input() height: number = 24;
 }
