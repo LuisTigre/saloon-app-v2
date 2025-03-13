@@ -1,40 +1,52 @@
 <app-pager>
-    <div class="clients">
-     <h5 class="title">Clientes</h5>
+  <div class="clients">
+    <h5 class="title">Clientes</h5>
 
-     <app-searchbox></app-searchbox>
+    <app-searchbox></app-searchbox>
       
-      <div class="table-content">
-        <table>
-          <tbody>
-            <tr *ngFor="let client of clientes">
-              <td class="table-item-td">
-                <div class="table-item">
-                  <div class="profile-picture">
-                    <img *ngIf="client.src" src="{{client.src}}" alt="">
-                    <span *ngIf="client.src ===''"><mat-icon>person</mat-icon></span>
-                  </div>
-                  <div class="profile-name">
-                    {{client.name}}
-                    <div class="country">
-                      {{client.country}}
-                    </div>
+    <div class="table-content">
+      <table>
+        <tbody>
+          <tr *ngFor="let client of clientes" [attr.id]="client.id">
+            <td class="table-item-td">
+              <div class="table-item" (click)="getSelectedElement($event)">
+                <div class="profile-picture">
+                  <img *ngIf="client.src" [src]="client.src" alt="">
+                  <span *ngIf="client.src === ''"><mat-icon>person</mat-icon></span>
+                </div>
+                <div class="profile-name">
+                  {{client.name}}
+                  <div class="country">
+                    {{client.country}}
                   </div>
                 </div>
-              </td>
-              <td class="table-action-td">
-                <div class="icon">
-                  <svg width="5" height="21" viewBox="0 0 5 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="2.5" cy="2.5" r="2.5" fill="#767676" />
-                    <circle cx="2.5" cy="18.5" r="2.5" fill="#767676" />
-                    <circle cx="2.5" cy="10.5" r="2.5" fill="#767676" />
-                  </svg>
+                <div class="view-details" *ngIf="!showdetails" (click)="getSelectedElement($event)">
+                  <mat-icon>{{ inconElement }}</mat-icon>
                 </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+              </div>
+              <div class="more-details">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse quasi id perspiciatis harum laborum. Quibusdam, rem voluptatem tempora suscipit unde corrupti expedita, fugit doloribus minus assumenda, voluptas eos iure natus?
+              </div>
+            </td>
+            <td class="table-action-td">
+              <div class="icon more-options" (click)="toggleRowOptions($event)">
+                <svg width="5" height="21" viewBox="0 0 5 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="2.5" cy="2.5" r="2.5" fill="#767676" />
+                  <circle cx="2.5" cy="18.5" r="2.5" fill="#767676" />
+                  <circle cx="2.5" cy="10.5" r="2.5" fill="#767676" />
+                </svg>
+              </div>
+              <div class="options">
+                <div class="option-wrapper">
+                  <div class="option" *ngFor="let option of optionsList" (click)="handleOptionClick($event,option, client)">
+                    <span><mat-icon>{{ option.icon }}</mat-icon></span>{{ option.label }}
+                  </div>
+                </div>
+              </div>
+            </td>             
+          </tr>
+        </tbody>
+      </table>
     </div>
-  </app-pager>
-  
+  </div>
+</app-pager>
