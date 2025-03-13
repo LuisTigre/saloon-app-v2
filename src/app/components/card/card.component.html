@@ -2,7 +2,7 @@
 <div class="cards">
     <div class="card" *ngFor="let item of data">
         <div class="img-wrapper">
-            <a href="/product_details?brast={{item.id}}"><img src="{{item.img}}" alt="{{item.title}}"></a>
+            <a href="/product_details?id={{item.id}}"><img src="{{item.img}}" alt="{{item.title}}"></a>
         </div>
         <h5>{{item.title}}</h5>
     </div>
