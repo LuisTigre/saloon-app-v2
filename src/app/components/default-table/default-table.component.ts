@@ -14,7 +14,6 @@ import { AddButtonComponent } from "../svg/add-button/add-button.component";
 import { CrudserviceService } from '../../services/crudservice.service';
 import { HttpClientModule } from '@angular/common/http';
 
-
 @Component({
   selector: 'app-default-table',
   standalone: true,
@@ -75,6 +74,7 @@ export class DefaultTableComponent implements OnInit, OnDestroy, OnChanges {
   braidStyle: any = null;
 
   @Input() data: any[] = [];
+  filteredData: any[] = []; // Add filteredData to hold the filtered results
   
   showdetails: boolean = false;
   inconElement: string = 'expand_more';
@@ -96,6 +96,7 @@ export class DefaultTableComponent implements OnInit, OnDestroy, OnChanges {
   ngOnInit(): void {
     // Add document click listener to close opened dropdowns
     document.addEventListener('click', this.documentClickHandler);
+    this.filteredData = this.data; // Initialize filteredData with the full data set
   }
 
   ngOnDestroy(): void {
@@ -312,6 +313,20 @@ export class DefaultTableComponent implements OnInit, OnDestroy, OnChanges {
         return 0;
       }
     });    
+    this.filteredData = this.data; // Update filteredData with the sorted data
+    this.cdr.detectChanges(); // Ensure change detection is triggered
+  }
+
+  // Filter data based on search input
+  filterData(searchTerm: string): void {
+    if (!searchTerm) {
+      this.filteredData = this.data; // If no search term, show all data
+    } else {
+      this.filteredData = this.data.filter(item =>
+        item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        item.description.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
     this.cdr.detectChanges(); // Ensure change detection is triggered
   }
 }

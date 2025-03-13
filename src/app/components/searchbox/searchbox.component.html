@@ -1,5 +1,4 @@
-<div class="searchbox">    
-    <input type="text" id="search">
-    <button id="search-btn"><span><mat-icon>search</mat-icon></span></button>      
-</div> 
+<div class="searchbox">
+  <input type="text" (input)="onSearch($event)" placeholder="Search...">
+</div>
 

@@ -1,14 +1,14 @@
 <div class="container">
     <h5 class="title">{{title}}</h5>
 
-    <app-searchbox *ngIf="searchable"></app-searchbox>
+    <app-searchbox *ngIf="searchable" (search)="filterData($event)"></app-searchbox>
     
-    <app-add-button (click)="createNewAttribute()"/>
+    <app-add-button (click)="createNewAttribute()"></app-add-button>
 
     <div class="table-content">
       <table>
         <tbody>
-          <tr *ngFor="let item of data" [attr.id]="item.id">
+          <tr *ngFor="let item of filteredData" [attr.id]="item.id">
             <td class="table-item-td">
               <div class="table-item" (click)="getSelectedElement($event)">
                 <div *ngIf="profileIcon" class="profile-picture">
