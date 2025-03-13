@@ -59,7 +59,7 @@ export class AttributesComponent implements OnInit {
         this.allAttributes = response;
         this.cdr.detectChanges(); // Ensure UI updates
         this.data = this.transformData(); // Call transformData after allAttributes is assigned
-        console.log(this.data); // Call transformData after allAttributes is assigned
+        console.log('Attribute tranformed:',this.data); // Call transformData after allAttributes is assigned
       },
       error: (error: any) =>
         console.error('Failed to fetch Attribute:', error),
@@ -92,6 +92,7 @@ export class AttributesComponent implements OnInit {
   }
 
   onCreateAttributeSuccess(): void {
+    console.log('onCreateAttributeSuccess');
     this.fetchAllAttributes(); // Fetch updated data after creating a new attribute
   }
 }

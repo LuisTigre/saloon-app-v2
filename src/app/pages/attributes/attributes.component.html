@@ -10,7 +10,7 @@
     [data]="data" 
     (updateTable)="onUpdateTable($event)" 
     (selectedItemChange)="onSelectedItemChange($event)"
-    (createdItemSuccess)="onCreateAttributeSuccess()">
+    (refreshTableData)="onCreateAttributeSuccess()">
     <ng-template let-item>
       <div class="details">
         <p>

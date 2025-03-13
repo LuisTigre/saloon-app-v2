@@ -67,9 +67,9 @@ export class DefaultTableComponent implements OnInit, OnDestroy, OnChanges {
       value: this.selectedItem?.category || '',
     },
   ];
-  @Output() updateTable = new EventEmitter<any>();
+ 
   @Output() selectedItemChange = new EventEmitter<any>(); // Add output for selectedItem
-  @Output() createdItemSuccess = new EventEmitter<void>(); // Add output for createdItemSuccess
+  @Output() refreshTableData = new EventEmitter<void>(); // Add output for refreshTableData
 
   braidStyle: any = null;
 
@@ -209,10 +209,8 @@ export class DefaultTableComponent implements OnInit, OnDestroy, OnChanges {
       // Use CrudserviceService to create a new attribute with endpoint "hairstyle-attributes"
       this.crudservice.create(this.endpoint, formData).subscribe({
         next: (response: any) => {
-          this.toastService.success(`${this.entityName} created successfully`);
-          this.fillTable(this.data); // Fill and sort data after creation
-          this.updateTable.emit(this.data); // Notify parent to refresh its data
-          this.createdItemSuccess.emit(); // Emit createdItemSuccess event
+          this.toastService.success(`${this.entityName} created successfully`);          
+          this.refreshTableData.emit(); // Emit refreshTableData event
           this.cdr.detectChanges();
         },
         error: (error: any) =>
@@ -273,8 +271,9 @@ export class DefaultTableComponent implements OnInit, OnDestroy, OnChanges {
               if (index !== -1) {                
                 this.data[index] = response;
               }
-              this.fillTable(this.data); // Fill and sort data after update
-              this.updateTable.emit(this.data); // Notify parent to refresh its data
+              // this.updateTable.emit(); // Notify parent to refresh its data
+              this.refreshTableData.emit(); // Emit refreshTableData event
+              // this.fillTable(this.data); // Fill and sort data after update
               this.cdr.detectChanges();
             },
             error: (error: any) =>
@@ -295,8 +294,7 @@ export class DefaultTableComponent implements OnInit, OnDestroy, OnChanges {
       next: (response: any) => {
         this.toastService.success(`${this.entityName} deleted successfully`);
         this.data = this.data.filter(c => c.id !== item.id); // Remove the deleted item from the local data
-        this.fillTable(this.data); // Fill and sort data after deletion
-        this.updateTable.emit(this.data); // Notify parent to refresh its data
+        this.refreshTableData.emit(); // Emit refreshTableData event
         this.cdr.detectChanges();
       },
       error: (error: any) =>
