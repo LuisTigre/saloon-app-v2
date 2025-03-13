@@ -5,8 +5,8 @@
       <div class="img-wrapper">
         <img [src]="braidStyle.imageUrl[0]" alt="{{ braidStyle.name }}">
         <span>
-          <mat-icon *ngIf="hasEditPermission()" (click)="openBraidingModal();">crop</mat-icon>
-          <mat-icon *ngIf="hasEditPermission()" (click)="openBraidingModal();">edit</mat-icon>
+          <mat-icon *ngIf="hasEditPermission()" (click)="editHairstyleDetails();">crop</mat-icon>
+          <mat-icon *ngIf="hasEditPermission()" (click)="editHairstyleDetails();">edit</mat-icon>
         </span>
       </div>
       <div class="paginator"></div>
@@ -17,11 +17,11 @@
       <div class="description">
         <span class="editable-item">
           <h4 class="title">{{ braidStyle.name }}</h4>
-          <mat-icon *ngIf="hasEditPermission()" (click)="openBraidingModal();">edit</mat-icon>
+          <mat-icon *ngIf="hasEditPermission()" (click)="editHairstyleDetails();">edit</mat-icon>
         </span>
         <p class="description">
           {{ braidStyle.description }}
-          <mat-icon *ngIf="hasEditPermission()" (click)="openBraidingModal();">edit</mat-icon>
+          <mat-icon *ngIf="hasEditPermission()" (click)="editHairstyleDetails();">edit</mat-icon>
         </p>                
       </div>
 
@@ -39,23 +39,23 @@
     <!-- Controllers -->
     <div class="controllers">
       <div class="braid-ops">
-        <ng-container *ngIf="braidStyle.stylesAttributes?.length > 0; else noAttributes">
+        <ng-container *ngIf="braidStyle.stylesAttributes[0]?.id != null; else noAttributes">
           <span *ngFor="let attribute of braidStyle.stylesAttributes" class="editable-item">
             <label *ngIf="braidStyle.stylesAttributes[0]?.id != null;">{{ attribute.name }}:</label>
-            <span (click)="openEditAttributesModal($event)"><mat-icon *ngIf="hasEditPermission() && braidStyle.stylesAttributes[0]?.id != null;">edit</mat-icon></span>
+            <span (click)="editAttachedAttributeDetails($event)"><mat-icon *ngIf="hasEditPermission() && braidStyle.stylesAttributes[0]?.id != null;">edit</mat-icon></span>
             <select>
               <option *ngFor="let attr_value of attribute.values" [value]="attr_value.id">
                 {{ attr_value.name }}
               </option>              
             </select>            
-            <!-- <mat-icon *ngIf="hasEditPermission()" (click)="openEditAttributesModal($event)">edit</mat-icon> -->
+            <!-- <mat-icon *ngIf="hasEditPermission()" (click)="editAttachedAttributeDetails($event)">edit</mat-icon> -->
           </span>
-          <mat-icon *ngIf="hasEditPermission() && braidStyle.stylesAttributes?.length > 0;" (click)="openAddAttributesModal();">add</mat-icon>
+          <mat-icon *ngIf="hasEditPermission() && braidStyle.stylesAttributes?.length > 0;" (click)="attachAttributesToHairstyle();">add</mat-icon>
         </ng-container>        
       
         <ng-template #noAttributes>
-          <button (click)="openAddAttributesModal()" id="attr-btn" *ngIf="hasEditPermission()">
-            Click here to add attribute options (e.g., color, length, texture, etc)
+          <button (click)="attachAttributesToHairstyle()" id="attr-btn" *ngIf="hasEditPermission()">
+            Click here to add an existing attribute options (e.g., color, length, texture, etc) or bellow to create a new attribute.
           </button>
         </ng-template>
       </div>
@@ -64,7 +64,7 @@
         <div class="content">
           <div class="duration editable-item">
             <span>Duration:</span> {{ braidStyle.duration }} min 
-            <mat-icon *ngIf="hasEditPermission()" (click)="openBraidingModal();">edit</mat-icon>
+            <mat-icon *ngIf="hasEditPermission()" (click)="editHairstyleDetails();">edit</mat-icon>
           </div>    
 
           <div *ngIf="!editable" class="datime editable-item">
@@ -75,7 +75,7 @@
           </div>
           <div class="price editable-item">
             <span>Price:</span> {{ braidStyle.price }} zl
-            <mat-icon *ngIf="hasEditPermission()" (click)="openBraidingModal();">edit</mat-icon>
+            <mat-icon *ngIf="hasEditPermission()" (click)="editHairstyleDetails();">edit</mat-icon>
           </div>                                           
         </div>
       </div>
@@ -83,8 +83,9 @@
 
     <!-- Actions -->
     <div class="actions">
-      <a class="button">Customize</a>
-      <a href="/bookings" class="button continue">Continue</a>
+      <a *ngIf="!hasEditPermission()" class="button">Customize</a>
+      <a *ngIf="hasEditPermission()" class="button" (click)="createNewAttribute()">New attribute</a>
+      <a href="/bookings"  class="button continue">Continue</a>
     </div>
   </div>
 </app-pager>
