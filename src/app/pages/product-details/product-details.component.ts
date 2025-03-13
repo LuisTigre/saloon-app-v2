@@ -8,6 +8,7 @@ import { AuthService } from '../../services/auth-service.service';
 import { EventDialogComponent } from '../../components/event-dialog/event-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 import { AddButtonComponent } from '../../components/svg/add-button/add-button.component';
 
 // Define an interface for attribute values (optional but recommended)
@@ -41,18 +42,19 @@ export class ProductDetailsComponent {
     private braidingStylesService: BraidingStylesService,
     private authService: AuthService,
     private dialog: MatDialog,
-    private toastService: ToastrService,
-    private cdr: ChangeDetectorRef // Inject ChangeDetectorRef
+    private cdr: ChangeDetectorRef, // Inject ChangeDetectorRef
+    private router: Router, // Inject Router
+    private toastService: ToastrService // Inject ToastrService
   ) {}
 
   ngOnInit(): void {
     this.fetchBraidingStyle();
-    console.log(this.fetchAllAttributes());
+    this.fetchAllAttributes();
   }
 
   fetchBraidingStyle(): void {
     const urlParams = new URLSearchParams(window.location.search);
-    const braid_id = urlParams.get('brast');
+    const braid_id = urlParams.get('id');
 
     if (braid_id) {
       this.braidingStylesService.getBraidingStyleDetail(braid_id).subscribe({
@@ -68,9 +70,10 @@ export class ProductDetailsComponent {
       console.error('No braiding style ID found in URL');
     }
   }
+  
   fetchAllAttributes(): void {
     const urlParams = new URLSearchParams(window.location.search);
-    const braid_id = urlParams.get('brast');
+    const braid_id = urlParams.get('id');
 
     if (braid_id) {
       this.braidingStylesService.getAllAttributes().subscribe({
@@ -115,19 +118,19 @@ export class ProductDetailsComponent {
     }
   }
 
-getFilteredAttributeValues(id: number): any {
-  const result = [];  
+  getFilteredAttributeValues(id: number): any {
+    const result = [];  
 
-  for (const item of this.braidStyle.stylesAttributes) {
-    if (item.values && Array.isArray(item.values)) {
-      const filteredValues = item.values.filter((value: any) => value.id === id);
-      if (filteredValues.length > 0) {
-        result.push({
-          ...item,
-          values: filteredValues
-        });
+    for (const item of this.braidStyle.stylesAttributes) {
+      if (item.values && Array.isArray(item.values)) {
+        const filteredValues = item.values.filter((value: any) => value.id === id);
+        if (filteredValues.length > 0) {
+          result.push({
+            ...item,
+            values: filteredValues
+          });
+        }
       }
-    }
   }
   
   console.log(result);
@@ -135,7 +138,7 @@ getFilteredAttributeValues(id: number): any {
   return result;
 }
 
-  openBraidingModal(): void {
+  editHairstyleDetails(): void {
     const dialogRef = this.dialog.open(EventDialogComponent, {
       // width: '80vw',  // Adjust width (e.g., 80% of viewport width)
       // height: '80vh', // Adjust height (e.g., 80% of viewport height)
@@ -214,7 +217,7 @@ getFilteredAttributeValues(id: number): any {
     });
   }
 
-  openCreateAttributesModal(): void {
+  createNewAttribute(): void {
     const dialogRef = this.dialog.open(EventDialogComponent, {
       // width: '80vw',  // Adjust width (e.g., 80% of viewport width)
       // height: '80vh', // Adjust height (e.g., 80% of viewport height)
@@ -222,39 +225,17 @@ getFilteredAttributeValues(id: number): any {
         title: 'Add Attributes',
         dynamicFields: [
           {
-            type: 'select',
-            label: 'Attribute name',
-            name: 'attribute_name',
-            options: [
-              { value: 'Color', label: 'Color' },
-              { value: 'Texture', label: 'Texture' },
-            ],
-          },
-          {
-            type: 'select',
-            label: 'Attribute Value',
-            name: 'attribute_value',
-            options: [
-              { value: 'Red', label: 'Red' },
-              { value: 'Green', label: 'Green' },
-            ],
-          },
-          {
-            type: 'select',
-            label: 'Charge in (percentage or fix cost)',
-            name: 'cost_type',
-            options: [
-              { value: 'Percentage', label: 'percentage' },
-              { value: 'fixed', label: 'Fix Cost' },
-            ],
+            type: 'text',
+            label: 'Name',
+            name: 'name',
+            value: '',
           },
           {
             type: 'text',
-            label: 'Charging value',
-            name: 'charging_value',
-            placeholder: 'How much it will add to base cost',
+            label: 'Category',
+            name: 'category',
             value: '',
-          },
+          },         
         ],
         buttons: [
           {
@@ -265,6 +246,16 @@ getFilteredAttributeValues(id: number): any {
               if (formGroup.valid) {
                 dialogRef.close({ ...formGroup.value, register: true });
               }
+            },
+          },
+          {
+            text: 'Manage all attributes',
+            value: false,
+            action: () => {             
+                dialogRef.close(); // Close the current dialog without submitting
+                this.dialog.closeAll(); // Close the current dialog
+                this.router.navigate(['/attributes']); // Navigate to the attributes route
+              
             },
           },
         ],
@@ -278,16 +269,16 @@ getFilteredAttributeValues(id: number): any {
         return;
       }
 
-      const { attribute_name, attribute_value } = result;
+      const { name, category } = result;
       this.braidingStylesService
-        .createBraindingsAttribute(attribute_name, attribute_value)
+        .createBraindingsAttribute(name, category)
         .subscribe({
           next: (response: any) => {
-            this.toastService.success('Hairstyle attribute added successfully');
+            this.toastService.success('Hairstyle attribute created successfully');
             this.braidStyle = {
               ...this.braidStyle,
-              attribute_name,
-              attribute_value,
+              name,
+              category,
             };
             this.cdr.detectChanges(); // Manually trigger change detection
           },
@@ -297,19 +288,19 @@ getFilteredAttributeValues(id: number): any {
     });
   }
 
-
-  openAddAttributesModal(): void {   
+  
+  createNewAttributeValue(): void {   
     const hairstyleId = new URLSearchParams(window.location.search).get(
       'brast'
     );
     const dialogRef = this.dialog.open(EventDialogComponent, {
       data: {
-        title: 'Add Attributes',
+        title: 'Add value to Attributes',
         dynamicFields: [
           {
             type: 'select',
             label: 'Attribute name',
-            name: 'attribute_id',
+            name: 'hairstyle_attribute_id',
             options: this.allAttributes.map(
               (el: { id: number; name: string; category: string }) => ({
                 value: el.id,
@@ -318,41 +309,158 @@ getFilteredAttributeValues(id: number): any {
             ),
           },
           {
-            type: 'select',
-            label: 'Attribute Value',
-            name: 'hairstyle_attribute_value_id',
-            options: [], // Initially empty
-          },
-          {
-            type: 'select',
-            label: 'Charge in (percentage or fix cost)',
-            name: 'cost_type',
-            options: [
-              { value: 'percentage', label: 'Percentage' },
-              { value: 'fixed', label: 'Fix Cost' },
-            ],
-          },
-          {
             type: 'text',
-            label: 'Aditional Cost',
-            name: 'additional_cost',
-            placeholder: 'How much it will add to base cost',
+            label: 'Attribute Value',
+            name: 'value',
             value: '',
-          },
+          },          
         ],
-        buttons: [
+        buttons: [          
           {
-            text: 'Add',
+            text: 'Create',
             value: false,
             action: () => {
               const formGroup = dialogRef.componentInstance.formGroup;
-              formGroup.removeControl('attribute_id');
               if (formGroup.valid) {
                 dialogRef.close({ ...formGroup.value });
               }
             },
           },
+          {
+            text: 'Manage all attributes',
+            value: false,
+            action: () => {
+              dialogRef.close(); // Close the current dialog without submitting
+                this.dialog.closeAll(); // Close the current dialog
+                this.router.navigate(['/attributes']); // Navigate to the attributes route
+            },
+          },
+          
         ],
+      },
+    });
+
+    dialogRef.afterOpened().subscribe(() => {
+      const formGroup = dialogRef.componentInstance.formGroup;
+
+      // Handle attribute_id changes
+      const attributeIdControl = formGroup.get('attribute_id');
+      
+      if (attributeIdControl) {
+        attributeIdControl.valueChanges.subscribe((selectedId: number) => {
+          console.log('Selected attribute_id:', selectedId);
+          this.loadAttributeValues(
+            selectedId,
+            dialogRef.componentInstance.data.dynamicFields
+          );
+        });
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (!result) {
+        console.log('Dialog was closed without submission.');
+        return;
+      }
+
+      console.log('Dialog result:', result);
+
+      const {
+        hairstyle_attribute_id,
+        value,
+      } = result;
+
+      console.log('Dialog After extration:', result); //log the object that will be sent to the backend.
+
+      if (hairstyle_attribute_id) {
+       
+        this.braidingStylesService
+          .createBraindingsAttributeValue(
+            hairstyle_attribute_id,
+            value
+          )
+          .subscribe({
+            next: (response: any) => {
+              this.toastService.success(
+                'Hairstyle attribute added successfully'
+              );
+              this.fetchBraidingStyle();              
+            },
+            error: (error: any) =>{
+              this.toastService.error('Addition failed:', error),
+              console.log('Error:', error)
+            }
+          });
+      } else {
+        this.toastService.error('Hairstyle ID is missing from the URL.');
+      }
+    });
+  }
+
+
+  attachAttributesToHairstyle(): void {   
+    const hairstyleId = new URLSearchParams(window.location.search).get(
+      'brast'
+    );
+    const dialogRef = this.dialog.open(EventDialogComponent, {
+      data: {
+      title: 'Add Attributes',
+      dynamicFields: [
+        {
+        type: 'select',
+        label: 'Attribute name',
+        name: 'attribute_id',
+        options: this.allAttributes.map(
+          (el: { id: number; name: string; category: string }) => ({
+          value: el.id,
+          label: el.name,
+          })
+        ),
+        },
+        {
+        type: 'select',
+        label: 'Attribute Value',
+        name: 'hairstyle_attribute_value_id',
+        options: [], // Initially empty
+        },
+        {
+        type: 'select',
+        label: 'Charge in (percentage or fix cost)',
+        name: 'cost_type',
+        options: [
+          { value: 'percentage', label: 'Percentage' },
+          { value: 'fixed', label: 'Fix Cost' },
+        ],
+        },
+        {
+        type: 'text',
+        label: 'Aditional Cost',
+        name: 'additional_cost',
+        placeholder: 'How much it will add to base cost',
+        value: '',
+        },
+      ],
+      buttons: [
+        {
+        text: 'Add',
+        value: false,
+        action: () => {
+          const formGroup = dialogRef.componentInstance.formGroup;
+          formGroup.removeControl('attribute_id');
+          if (formGroup.valid) {
+          dialogRef.close({ ...formGroup.value });
+          }
+        },
+        },
+        {
+        text: 'Create new attrib. value',
+        value: false,
+        action: () => {
+          dialogRef.close(); // Close the current dialog without submitting
+          this.createNewAttributeValue(); // Open the new modal
+        },
+        },
+      ],
       },
     });
 
@@ -365,6 +473,7 @@ getFilteredAttributeValues(id: number): any {
 
       // Handle attribute_id changes
       const attributeIdControl = formGroup.get('attribute_id');
+      
       if (attributeIdControl) {
         attributeIdControl.valueChanges.subscribe((selectedId: number) => {
           console.log('Selected attribute_id:', selectedId);
@@ -439,6 +548,10 @@ getFilteredAttributeValues(id: number): any {
             (field) => field.name === 'hairstyle_attribute_value_id'
           );
           if (attributeValueField) {
+            if(filteredValues.length === 0){
+              filteredValues.push({ value: '', label: 'No values found' });
+            }
+            // console.log("empty values: ",filteredValues);
             attributeValueField.options = filteredValues;
           }
 
@@ -450,7 +563,7 @@ getFilteredAttributeValues(id: number): any {
       );
   }
 
-  openEditAttributesModal(event: Event): void {
+  editAttachedAttributeDetails(event: Event): void {
 
     this.updateSelectedAttributePricingId(event);
 
