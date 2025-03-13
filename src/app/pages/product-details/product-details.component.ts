@@ -290,9 +290,7 @@ export class ProductDetailsComponent {
 
   
   createNewAttributeValue(): void {   
-    const hairstyleId = new URLSearchParams(window.location.search).get(
-      'brast'
-    );
+    const hairstyleId = new URLSearchParams(window.location.search).get('id');
     const dialogRef = this.dialog.open(EventDialogComponent, {
       data: {
         title: 'Add value to Attributes',
@@ -399,9 +397,7 @@ export class ProductDetailsComponent {
 
 
   attachAttributesToHairstyle(): void {   
-    const hairstyleId = new URLSearchParams(window.location.search).get(
-      'brast'
-    );
+    const hairstyleId = new URLSearchParams(window.location.search).get('id');
     const dialogRef = this.dialog.open(EventDialogComponent, {
       data: {
       title: 'Add Attributes',
