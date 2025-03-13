@@ -1,41 +1,42 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { DefaultTableComponent } from '../../components/default-table/default-table.component';
 import { PagerComponent } from "../../components/pager/pager.component";
 import { SearchboxComponent } from "../../components/searchbox/searchbox.component";
 import { BraidingStylesService } from '../../services/braiding-style.service';
 import { AuthService } from '../../services/auth-service.service';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CrudserviceService } from '../../services/crudservice.service';
 
 @Component({
-  selector: 'app-attributes',
+  selector: 'app-attribute-values',
   standalone: true,
   imports: [DefaultTableComponent, PagerComponent, SearchboxComponent],
   providers: [BraidingStylesService, AuthService, CrudserviceService],
-  templateUrl: './attributes.component.html',
-  styleUrls: ['./attributes.component.scss']
+  templateUrl: './attribute-values.component.html',
+  styleUrls: ['./attribute-values.component.scss']
 })
-export class AttributesComponent implements OnInit {    
-  title: string = 'Attributes';
+export class AttributeValuesComponent implements OnInit {    
+  title: string = 'Attribute Values';
   searchable: boolean = true;
   profileIcon: string = "person";  
-  allAttributes: any = null;
+  allAttributeValue: any = null;
   optionsList: any[] = [
     { "id": 1, "label": "Delete", "icon": "delete" },
     { "id": 2, "label": "Edit", "icon": "edit" },
-    { "id": 3, "label": "Details", "icon": "subdirectory_arrow_right", "route": "/attributes" },
+   
   ];   
   data: any[] = [];
+  attribute_id: string = this.route.snapshot.paramMap.get('id') || '';
   selectedItem: any = null;
   creationalFields: any[] = [
-    { type: 'text', label: 'Name', name: 'name', value: '' },
-    { type: 'text', label: 'Category', name: 'category', value: '' }
+    { type: 'text', label: 'Id', name: 'hairstyle_attribute_id', value: '' },
+    { type: 'text', label: 'Name', name: 'value', value: '' }
   ];
   updatableFields: any[] = [
-    { type: 'text', label: 'Name', name: 'name', value: this.selectedItem?.name || '' },
-    { type: 'text', label: 'Category', name: 'category', value: this.selectedItem?.category || '' }
+    { type: 'text', label: 'Id', name: 'hairstyle_attribute_id', value: this.selectedItem?.id || '' },
+    { type: 'text', label: 'Name', name: 'value', value: this.selectedItem?.value || '' }
   ];
 
   constructor(
@@ -45,6 +46,7 @@ export class AttributesComponent implements OnInit {
     private dialog: MatDialog,
     private cdr: ChangeDetectorRef, // Inject ChangeDetectorRef
     private router: Router, // Inject Router
+    private route: ActivatedRoute, // Inject ActivatedRoute
     private toastService: ToastrService // Inject ToastrService
   ) {}
 
@@ -53,29 +55,32 @@ export class AttributesComponent implements OnInit {
   }
   
   fetchAllAttributes(): void {        
-    this.braidingStylesService.getAllAttributes().subscribe({
+    const attributeId = this.route.snapshot.paramMap.get('id');
+    const att_id_numb = parseInt(attributeId || '0', 10);
+    this.crudserviceService.getAll('hairstyles-attributes/' + att_id_numb + '/values').subscribe({
       next: (response: any) => {
-        console.log('Attribute fetched:', response);
-        this.allAttributes = response;
+        console.log('Attribute values fetched:', response);
+        this.allAttributeValue = response;
         this.cdr.detectChanges(); // Ensure UI updates
         this.data = this.transformData(); // Call transformData after allAttributes is assigned
         console.log(this.data); // Call transformData after allAttributes is assigned
       },
       error: (error: any) =>
-        console.error('Failed to fetch Attribute:', error),
+        console.error('Failed to fetch attribute values:', error),
     });
   }
 
+  // Default table data transformation
   transformData(): any[] {
-    if (!this.allAttributes || this.allAttributes.length === 0) {
+    if (!this.allAttributeValue || this.allAttributeValue.length === 0) {
       return [];
     }
     
-    return this.allAttributes.map((item: any) => ({
+    return this.allAttributeValue.map((item: any) => ({
       id: item?.id,
-      name: item?.name,
-      description: item?.values.map((value: any) => value?.value).join(',  '), // Extract values array and join with comma and space
-      details: item?.values.map((value: any) => value?.value).join(',  '), // Extract values array and join with comma and space
+      name: item?.value,
+      description: 'oba', // Extract values array and join with comma and space
+      details: `oba`, // Extract values array and join with comma and space
     }));
   }
 
@@ -86,12 +91,13 @@ export class AttributesComponent implements OnInit {
   onSelectedItemChange(item: any): void {
     this.selectedItem = item;
     this.updatableFields = [
-      { type: 'text', label: 'Name', name: 'name', value: this.selectedItem?.name || '' },
-      { type: 'text', label: 'Category', name: 'category', value: this.selectedItem?.category || '' }
+      { type: 'text', label: 'Id', name: 'hairstyle_attribute_id', value: this.selectedItem?.id || '' },
+      { type: 'text', label: 'Name', name: 'value', value: this.selectedItem?.value || '' }
     ];
+  
   }
 
   onCreateAttributeSuccess(): void {
-    this.fetchAllAttributes(); // Fetch updated data after creating a new attribute
+    this.fetchAllAttributes(); // Fetch updated data after creating a new attribute value
   }
 }

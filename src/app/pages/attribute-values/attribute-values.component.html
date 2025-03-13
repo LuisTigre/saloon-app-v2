@@ -1,0 +1,22 @@
+<div class="attributes-container">
+  <app-default-table
+    [title]="title"
+    [searchable]="searchable"    
+    [endpoint]="'hairstyle-attribute-values'"
+    [entityName]="'Value'"
+    [optionsList]="optionsList"
+    [creationalFields]="creationalFields"
+    [updatableFields]="updatableFields"
+    [data]="data"
+    (updateTable)="onUpdateTable($event)"
+    (selectedItemChange)="onSelectedItemChange($event)"
+    (createAttributeSuccess)="onCreateAttributeSuccess()">
+    <ng-template let-item>
+      <div class="details">
+        <p>
+          {{ item.details }}
+        </p>
+      </div>
+    </ng-template>
+  </app-default-table>
+</div>

@@ -49,5 +49,11 @@ export const routes: Routes = [
             import('./pages/attributes/attributes.component').then((c) => c.AttributesComponent)
 
     },
+    {
+        path: 'attributes/:id',
+        loadComponent: () => 
+            import('./pages/attribute-values/attribute-values.component').then((c) => c.AttributeValuesComponent)
+
+    },
     
 ];

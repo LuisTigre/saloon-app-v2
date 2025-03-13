@@ -150,7 +150,7 @@ export class DefaultTableComponent implements OnInit, OnDestroy, OnChanges {
     event.stopPropagation(); 
     
     if (option.route) {
-      const route = option.route.includes('?') ? `${option.route}&id=${item.id}` : `${option.route}?id=${item.id}`;
+      const route = option.route.includes('?') ? `${option.route}id=${item.id}` : `${option.route}/${item.id}`;
       this.router.navigateByUrl(decodeURIComponent(route));
     } else if (option.id === 1) { // Delete action
       if (confirm(`Are you sure you want to delete ${this.entityName.toLowerCase()} "${item.name}"?`)) {
@@ -203,6 +203,8 @@ export class DefaultTableComponent implements OnInit, OnDestroy, OnChanges {
         acc[field.name] = result[field.name];
         return acc;
       }, {});
+
+      console.log('Form data:', formData);
 
       // Use CrudserviceService to create a new attribute with endpoint "hairstyle-attributes"
       this.crudservice.create(this.endpoint, formData).subscribe({
@@ -268,7 +270,7 @@ export class DefaultTableComponent implements OnInit, OnDestroy, OnChanges {
             next: (response: any) => {
               this.toastService.success(`${this.entityName} updated successfully`);
               const index = this.data.findIndex(d => d.id === this.selectedItem.id);
-              if (index !== -1) {
+              if (index !== -1) {                
                 this.data[index] = response;
               }
               this.fillTable(this.data); // Fill and sort data after update
@@ -304,6 +306,7 @@ export class DefaultTableComponent implements OnInit, OnDestroy, OnChanges {
 
   // Fill and sort data alphabetically by name
   fillTable(data: any[]): void {
+    this.data = data;
     this.data = data.sort((a, b) => {
       if (a.name.toLowerCase() < b.name.toLowerCase()) {
         return -1;

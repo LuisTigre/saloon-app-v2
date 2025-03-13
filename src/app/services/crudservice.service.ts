@@ -19,6 +19,7 @@ export class CrudserviceService {
   }
 
   getAll<T>(endpoint: string): Observable<T> {
+    console.log("getAll => ",'Endpoint:', endpoint);
     return this.httpClient.get<T>(`${this.apiUrl}/${endpoint}`, { headers: this.getHeaders() });
   }
 
