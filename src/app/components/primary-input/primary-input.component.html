@@ -1,4 +1,4 @@
-<mat-form-field appearance="fill" *ngIf="type !== 'radio' && type !== 'select'">
+<mat-form-field appearance="fill" *ngIf="type !== 'radio' && type !== 'select' && type !== 'hidden'">
   <mat-label>{{ label }}</mat-label>
   <input 
     [type]="type" 
@@ -27,3 +27,5 @@
     </mat-radio-button>
   </mat-radio-group>
 </div>
+
+<input *ngIf="type === 'hidden'" [type]="type" [(ngModel)]="value" />

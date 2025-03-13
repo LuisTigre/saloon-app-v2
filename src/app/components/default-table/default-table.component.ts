@@ -270,10 +270,9 @@ export class DefaultTableComponent implements OnInit, OnDestroy, OnChanges {
               const index = this.data.findIndex(d => d.id === this.selectedItem.id);
               if (index !== -1) {                
                 this.data[index] = response;
-              }
-              // this.updateTable.emit(); // Notify parent to refresh its data
-              this.refreshTableData.emit(); // Emit refreshTableData event
-              // this.fillTable(this.data); // Fill and sort data after update
+              } 
+              console.log('Updated performed:');             
+              this.refreshTableData.emit(); // Emit refreshTableData event         
               this.cdr.detectChanges();
             },
             error: (error: any) =>

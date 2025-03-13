@@ -7,7 +7,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { CommonModule } from '@angular/common';
 
-type InputTypes = "text" | "email" | "password" | "radio" | "textarea" | "select"; // Added "select"
+type InputTypes = "text" | "email" | "password" | "radio" | "textarea" | "select" | "hidden"; // Added "hidden"
 
 @Component({
   selector: 'app-primary-input',
