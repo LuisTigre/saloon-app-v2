@@ -96,7 +96,7 @@ export class BraidingStylesService {
     price: string
   ): Observable<any> {
     const urlParams = new URLSearchParams(window.location.search);
-    const braid_id = urlParams.get('brast');
+    const braid_id = urlParams.get('id');
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${sessionStorage.getItem('auth-token')}`,
@@ -109,21 +109,39 @@ export class BraidingStylesService {
   }
   
   createBraindingsAttribute(
-    attribute_name: string,
-    attribute_value: string,
+    name: string,
+    category: string,
   ): Observable<any> {
     const urlParams = new URLSearchParams(window.location.search);
-    const braid_id = urlParams.get('brast');
+    const braid_id = urlParams.get('id');
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${sessionStorage.getItem('auth-token')}`,
     });
     return this.httpClient.post<any>(
-      `${this.apiUrl}/${braid_id}/attributes`,
-      { attribute_name, attribute_value },
+      `${this.apiUrl}/hairstyle-attributes`,
+      { name, category },
       { headers }
     );
   }
+
+  createBraindingsAttributeValue(
+    hairstyle_attribute_id: number,
+    value: string,
+  ): Observable<any> {
+    const urlParams = new URLSearchParams(window.location.search);
+    const braid_id = urlParams.get('id');
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${sessionStorage.getItem('auth-token')}`,
+    });
+    return this.httpClient.post<any>(
+      `${this.apiUrl}/hairstyle-attribute-values`,
+      { hairstyle_attribute_id, value },
+      { headers }
+    );
+  }
+
 
   attachHairAttribute(
     hairstyle_id: number,
@@ -132,7 +150,7 @@ export class BraidingStylesService {
     cost_type: string
   ): Observable<any> {
     const urlParams = new URLSearchParams(window.location.search);
-    const braid_id = urlParams.get('brast');
+    const braid_id = urlParams.get('id');
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${sessionStorage.getItem('auth-token')}`,
