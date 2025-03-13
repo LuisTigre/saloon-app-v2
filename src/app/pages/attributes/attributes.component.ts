@@ -79,10 +79,6 @@ export class AttributesComponent implements OnInit {
     }));
   }
 
-  onUpdateTable(data: any): void {
-    this.data = data;
-  }
-
   onSelectedItemChange(item: any): void {
     this.selectedItem = item;
     this.updatableFields = [
@@ -91,7 +87,7 @@ export class AttributesComponent implements OnInit {
     ];
   }
 
-  onCreateAttributeSuccess(): void {
+  onRefreshAtributes(): void {
     console.log('onCreateAttributeSuccess');
     this.fetchAllAttributes(); // Fetch updated data after creating a new attribute
   }

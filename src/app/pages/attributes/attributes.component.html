@@ -7,10 +7,9 @@
     [optionsList]="optionsList"
     [creationalFields]="creationalFields"
     [updatableFields]="updatableFields"
-    [data]="data" 
-    (updateTable)="onUpdateTable($event)" 
+    [data]="data"
     (selectedItemChange)="onSelectedItemChange($event)"
-    (refreshTableData)="onCreateAttributeSuccess()">
+    (refreshTableData)="onRefreshAtributes()">
     <ng-template let-item>
       <div class="details">
         <p>

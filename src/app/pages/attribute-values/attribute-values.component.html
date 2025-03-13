@@ -1,5 +1,5 @@
-<div class="attributes-container">
-  <app-default-table
+<app-pager>
+  <app-default-table 
     [title]="title"
     [searchable]="searchable"    
     [endpoint]="'hairstyle-attribute-values'"
@@ -7,10 +7,9 @@
     [optionsList]="optionsList"
     [creationalFields]="creationalFields"
     [updatableFields]="updatableFields"
-    [data]="data"
-    (updateTable)="onUpdateTable($event)"
+    [data]="data"    
     (selectedItemChange)="onSelectedItemChange($event)"
-    (createAttributeSuccess)="onCreateAttributeSuccess()">
+    (refreshTableData)="onRefreshAttributeValues()">
     <ng-template let-item>
       <div class="details">
         <p>
@@ -19,4 +18,4 @@
       </div>
     </ng-template>
   </app-default-table>
-</div>
+</app-pager>

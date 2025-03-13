@@ -25,17 +25,17 @@ export class AttributeValuesComponent implements OnInit {
   optionsList: any[] = [
     { "id": 1, "label": "Delete", "icon": "delete" },
     { "id": 2, "label": "Edit", "icon": "edit" },
-   
+
   ];   
   data: any[] = [];
   attribute_id: string = this.route.snapshot.paramMap.get('id') || '';
   selectedItem: any = null;
   creationalFields: any[] = [
-    { type: 'text', label: 'Id', name: 'hairstyle_attribute_id', value: '' },
+    { type: 'hidden', name: 'hairstyle_attribute_id', value: this.attribute_id},
     { type: 'text', label: 'Name', name: 'value', value: '' }
   ];
   updatableFields: any[] = [
-    { type: 'text', label: 'Id', name: 'hairstyle_attribute_id', value: this.selectedItem?.id || '' },
+    { type: 'hidden', name: 'hairstyle_attribute_id', value: this.selectedItem?.id || '' },
     { type: 'text', label: 'Name', name: 'value', value: this.selectedItem?.value || '' }
   ];
 
@@ -79,25 +79,21 @@ export class AttributeValuesComponent implements OnInit {
     return this.allAttributeValue.map((item: any) => ({
       id: item?.id,
       name: item?.value,
-      description: 'oba', // Extract values array and join with comma and space
-      details: `oba`, // Extract values array and join with comma and space
+      description: '', // Extract values array and join with comma and space
+      details: ``, // Extract values array and join with comma and space
     }));
-  }
-
-  onUpdateTable(data: any): void {
-    this.data = data;
-  }
+  } 
 
   onSelectedItemChange(item: any): void {
     this.selectedItem = item;
     this.updatableFields = [
-      { type: 'text', label: 'Id', name: 'hairstyle_attribute_id', value: this.selectedItem?.id || '' },
+      { type: 'hidden', name: 'hairstyle_attribute_id', value: this.selectedItem?.id || '' },
       { type: 'text', label: 'Name', name: 'value', value: this.selectedItem?.value || '' }
     ];
-  
   }
 
-  onCreateAttributeSuccess(): void {
+  onRefreshAttributeValues(): void {
+    console.log('onRefreshTableData called...');
     this.fetchAllAttributes(); // Fetch updated data after creating a new attribute value
   }
 }
