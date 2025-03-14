@@ -17,11 +17,19 @@
       <div class="description">
         <span class="editable-item">
           <h4 class="title">{{ braidStyle.name }}</h4>
-          <mat-icon *ngIf="hasEditPermission()" (click)="editHairstyleDetails();">edit</mat-icon>
+          <span *ngIf="hasEditPermission()" (click)="editHairstyleDetails();"><app-edit-button 
+                [width]="10" [height]="10"
+                *ngIf="hasEditPermission() && braidStyle.stylesAttributes[0]?.id != null;" 
+                />
+          </span>
         </span>
         <p class="description">
           {{ braidStyle.description }}
-          <mat-icon *ngIf="hasEditPermission()" (click)="editHairstyleDetails();">edit</mat-icon>
+          <span *ngIf="hasEditPermission()" (click)="editHairstyleDetails();"><app-edit-button 
+                [width]="10" [height]="10"
+                *ngIf="hasEditPermission() && braidStyle.stylesAttributes[0]?.id != null;" 
+                />
+          </span>
         </p>                
       </div>
 
@@ -42,15 +50,26 @@
         <ng-container *ngIf="braidStyle.stylesAttributes[0]?.id != null; else noAttributes">
           <span *ngFor="let attribute of braidStyle.stylesAttributes" class="editable-item">
             <label *ngIf="braidStyle.stylesAttributes[0]?.id != null;">{{ attribute.name }}:</label>
-            <span (click)="editAttachedAttributeDetails($event)"><mat-icon *ngIf="hasEditPermission() && braidStyle.stylesAttributes[0]?.id != null;">edit</mat-icon></span>
-            <select>
-              <option *ngFor="let attr_value of attribute.values" [value]="attr_value.id">
+            
+            <span (click)="editAttachedAttributeDetails($event)">
+              <app-edit-button 
+                [width]="10" [height]="10"
+                *ngIf="hasEditPermission() && braidStyle.stylesAttributes[0]?.id != null;" 
+                />
+            </span>
+
+            <select (change)="updateSelectedAttributePricingValue($event)">
+              <option *ngFor="let attr_value of attribute.values" 
+                      [value]="attr_value.id"
+                      [attr.data-price]="attr_value.additional_cost"
+                      [attr.data-cost-type]="attr_value.cost_type">
                 {{ attr_value.name }}
               </option>              
             </select>            
             <!-- <mat-icon *ngIf="hasEditPermission()" (click)="editAttachedAttributeDetails($event)">edit</mat-icon> -->
           </span>
-          <mat-icon *ngIf="hasEditPermission() && braidStyle.stylesAttributes?.length > 0;" (click)="attachAttributesToHairstyle();">add</mat-icon>
+          <app-add-button [width]="15" [height]="15" *ngIf="hasEditPermission() && braidStyle.stylesAttributes?.length > 0;" (click)="attachAttributesToHairstyle();"/>
+                  
         </ng-container>        
       
         <ng-template #noAttributes>
@@ -64,18 +83,40 @@
         <div class="content">
           <div class="duration editable-item">
             <span>Duration:</span> {{ braidStyle.duration }} min 
-            <mat-icon *ngIf="hasEditPermission()" (click)="editHairstyleDetails();">edit</mat-icon>
+            <span *ngIf="hasEditPermission()" (click)="editHairstyleDetails();">
+              <app-edit-button 
+                [width]="10" [height]="10"
+                *ngIf="hasEditPermission() && braidStyle.stylesAttributes[0]?.id != null;"
+              />              
+            </span>
           </div>    
 
           <div *ngIf="!editable" class="datime editable-item">
             <span>Date:</span> {{ braidStyle.date }} <mat-icon>event</mat-icon>
-          </div> 
+          </div>
           <div *ngIf="!editable" class="time editable-item">
             <span>Time:</span> {{ braidStyle.time }} <mat-icon>alarm</mat-icon>
           </div>
+          <div *ngIf="editable" class="price editable-item">
+            <span>Base:</span> {{ braidStyle.price }} zl
+            <span *ngIf="hasEditPermission()" (click)="editHairstyleDetails();">
+              <app-edit-button [width]="10" [height]="10"
+                *ngIf="hasEditPermission() && braidStyle.stylesAttributes[0]?.id != null;" />
+            </span>
+          </div>
+          <div *ngIf="editable" class="price editable-item">
+            <span>Addit:</span> {{ additionalCost }} zl
+            <span *ngIf="hasEditPermission()" (click)="editHairstyleDetails();">
+              <app-edit-button [width]="10" [height]="10"
+                *ngIf="hasEditPermission() && braidStyle.stylesAttributes[0]?.id != null;" />
+            </span>
+          </div>
           <div class="price editable-item">
-            <span>Price:</span> {{ braidStyle.price }} zl
-            <mat-icon *ngIf="hasEditPermission()" (click)="editHairstyleDetails();">edit</mat-icon>
+            <span *ngIf="editable">Total:</span> <span *ngIf="!editable">Price:</span> {{ totalPrice }} zl
+            <span *ngIf="hasEditPermission()" (click)="editHairstyleDetails();">
+              <app-edit-button [width]="10" [height]="10"
+                *ngIf="hasEditPermission() && braidStyle.stylesAttributes[0]?.id != null;" />
+            </span>
           </div>                                           
         </div>
       </div>
@@ -84,8 +125,9 @@
     <!-- Actions -->
     <div class="actions">
       <a *ngIf="!hasEditPermission()" class="button">Customize</a>
-      <a *ngIf="hasEditPermission()" class="button" (click)="createNewAttribute()">New attribute</a>
-      <a href="/bookings"  class="button continue">Continue</a>
+      <a *ngIf="hasEditPermission()" class="button" href="/attributes">List of attributes</a>
+      <a *ngIf="!hasEditPermission()" href="/bookings"  class="button continue">Continue</a>
+      <a *ngIf="hasEditPermission()" class="button" href="/attributes">List of hairstyles</a>
     </div>
   </div>
 </app-pager>
