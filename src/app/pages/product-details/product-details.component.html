@@ -3,11 +3,22 @@
     <!-- Image Carousel -->
     <div class="img-carrossel">            
       <div class="img-wrapper">
-        <img [src]="braidStyle.imageUrl[0]" alt="{{ braidStyle.name }}">
-        <span>
-          <mat-icon *ngIf="hasEditPermission()" (click)="editHairstyleDetails();">crop</mat-icon>
-          <mat-icon *ngIf="hasEditPermission()" (click)="editHairstyleDetails();">edit</mat-icon>
-        </span>
+        <img [src]="getImageUrl()" alt="{{ braidStyle.name }}">
+        <div>
+          <form id="photo_form" action="" *ngIf="hasEditPermission()">
+            <mat-icon *ngIf="hasEditPermission()" (click)="editHairstyleDetails();">delete</mat-icon>
+            <input type="hidden" name="hairstyle_id" value={{hairstyleId}} />
+            <input (change)="createHairstyleImage($event)" id="img_file" type="file" name="image" />
+        
+            <label class="switch">
+              <input type="checkbox" name="is_main_image" [checked]="is_main_image"/>
+              <span class="slider">
+                <span class="switch-label">Cover</span>
+              </span>
+            </label>
+            <label for="img_file"><mat-icon>add</mat-icon></label>        
+          </form>
+        </div>
       </div>
       <div class="paginator"></div>
     </div>

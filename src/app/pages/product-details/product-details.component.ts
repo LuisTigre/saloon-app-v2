@@ -11,6 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { AddButtonComponent } from '../../components/svg/add-button/add-button.component';
 import { EditButtonComponent } from "../../components/svg/edit-button/edit-button.component";
+import { CrudserviceService } from '../../services/crudservice.service';
 
 // Define an interface for attribute values (optional but recommended)
 interface AttributeValue {
@@ -29,7 +30,7 @@ interface AttributeValue {
     AddButtonComponent,
     EditButtonComponent
   ],
-  providers: [BraidingStylesService, AuthService],
+  providers: [BraidingStylesService, AuthService, CrudserviceService],
   templateUrl: './product-details.component.html',
   styleUrls: ['./product-details.component.scss'],
 })
@@ -41,9 +42,13 @@ export class ProductDetailsComponent {
   selectedAttributePricing: any;
   additionalCost: number = 0;
   totalPrice: number = 0;
+  serverIp: string = window.location.hostname || 'localhost';
+  hairstyleId = new URLSearchParams(window.location.search).get('id');
+  def_img: string = "https://images.unsplash.com/photo-1600456899121-68eda5705257?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Z3JheXxlbnwwfHwwfHx8MA%3D%3D";
 
   constructor(
     private braidingStylesService: BraidingStylesService,
+    private crudService: CrudserviceService,
     private authService: AuthService,
     private dialog: MatDialog,
     private cdr: ChangeDetectorRef, // Inject ChangeDetectorRef
@@ -516,4 +521,54 @@ export class ProductDetailsComponent {
 
     this.totalPrice = parseFloat(finalPrice.toFixed(2));
   }
+
+  getImageUrl(): string {
+    let imgUrl = this.braidStyle.imageUrl == null ? this.def_img : this.braidStyle.imageUrl[0]?.url;
+    return `http://${this.serverIp}:8000${imgUrl}`;
+  }
+
+  is_main_image(): boolean{
+    return this.braidStyle?.imageUrl?.is_main_image == 1;
+  }
+
+
+  createHairstyleImage(event: Event): void {
+    const element = event.target as HTMLInputElement;
+    const form = element.closest('form');
+  
+    if (!form) {
+      console.error('Form not found!');
+      return;
+    }
+  
+    const formData = new FormData(form); // Collect all form fields
+  
+    // Handle checkbox manually
+    const checkbox = form.querySelector<HTMLInputElement>('input[name="is_main_image"]');
+    if (checkbox) {
+      formData.set('is_main_image', checkbox.checked ? '1' : '0');
+    }
+  
+    // Debugging: Log form data correctly
+    // for (const pair of formData.entries()) {
+    //   console.log(`${pair[0]}:`, pair[1]);
+    // }
+  
+    // Send form data using CrudserviceService
+    this.crudService.create<any>('hairstyle-images', formData).subscribe({
+      next: (response: any) => {
+        console.log('Image uploaded:', response);
+        this.toastService.success('Image uploaded successfully');
+        this.fetchBraidingStyle();
+      },
+      error: (error: any) => {
+        console.error('Image upload error:', error);
+        this.toastService.error('Image upload failed');
+      }
+    });
+  }
+  
+  
+  
+  
 }

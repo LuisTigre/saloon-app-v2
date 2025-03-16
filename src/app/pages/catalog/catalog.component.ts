@@ -27,6 +27,7 @@ export class CatalogComponent implements OnInit {
   def_img: string =
     "https://images.unsplash.com/photo-1600456899121-68eda5705257?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Z3JheXxlbnwwfHwwfHx8MA%3D%3D";
   cards: Card[] = [];
+  serverIp: string = window.location.hostname || 'localhost';
 
   constructor(
     private braidingStylesService: BraidingStylesService,
@@ -38,16 +39,15 @@ export class CatalogComponent implements OnInit {
     this.updateServiceList();
   }
 
-  updateServiceList():void{
+  updateServiceList(): void {
     this.braidingStylesService.getBraidingStyles().subscribe({
       next: (response: any[]) => {
-
         console.log('Braiding styles fetched:', response);
         this.cards = response.map((style: any) => ({
           id: style.id,
           img:
-            style.images && style?.images[0]?.image_url != null || ''
-              ? style.images[0].image_url
+            style.images && style.images[0]?.image_url
+              ? `http://${this.serverIp}:8000${style.images[0].image_url}`
               : this.def_img,
           title: style.name,
         }));
@@ -122,8 +122,8 @@ export class CatalogComponent implements OnInit {
       this.braidingStylesService
         .createBraindingsStyle(name, description, duration, price)
         .subscribe({
-          next: (response: any) =>{
-            this.toastService.success('Hairstyle created:', response)
+          next: (response: any) => {
+            this.toastService.success('Hairstyle created:', response);
             this.updateServiceList();
           },
           error: (response: any) =>

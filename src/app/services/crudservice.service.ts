@@ -23,9 +23,11 @@ export class CrudserviceService {
     return this.httpClient.get<T>(`${this.apiUrl}/${endpoint}`, { headers: this.getHeaders() });
   }
 
-  create<T>(endpoint: string, item: T): Observable<T> {
-    return this.httpClient.post<T>(`${this.apiUrl}/${endpoint}`, item, { headers: this.getHeaders() });
+  create<T>(endpoint: string, item: T | FormData): Observable<T> {
+    const headers = item instanceof FormData ? new HttpHeaders({}) : this.getHeaders();
+    return this.httpClient.post<T>(`${this.apiUrl}/${endpoint}`, item, { headers });
   }
+  
 
   get<T>(endpoint: string, id: number): Observable<T> {
     return this.httpClient.get<T>(`${this.apiUrl}/${endpoint}/${id}`, { headers: this.getHeaders() });
