@@ -1,4 +1,4 @@
-import { Component, ChangeDetectorRef, SimpleChanges } from '@angular/core';
+import { Component, ChangeDetectorRef, SimpleChanges, HostListener,  ElementRef, ViewChild } from '@angular/core';
 import { PagerComponent } from '../../components/pager/pager.component';
 import { MatIconModule } from '@angular/material/icon';
 import { BraidingStylesService } from '../../services/braiding-style.service';
@@ -35,6 +35,8 @@ interface AttributeValue {
   styleUrls: ['./product-details.component.scss'],
 })
 export class ProductDetailsComponent {
+  @ViewChild('imgWrapper', { static: false }) imgWrapper?: ElementRef;
+
   braidStyle: any = null;
   allAttributes: any = null;
   attributeValues: any = null;
@@ -45,7 +47,11 @@ export class ProductDetailsComponent {
   serverIp: string = window.location.hostname || 'localhost';
   hairstyleId = new URLSearchParams(window.location.search).get('id');
   def_img: string = "https://images.unsplash.com/photo-1600456899121-68eda5705257?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Z3JheXxlbnwwfHwwfHx8MA%3D%3D";
-
+  
+  currentImageIndex: number = 0;
+  isDragging: boolean = false; // Add isDragging property
+  startX: number = 0; // Add startX property
+  
   constructor(
     private braidingStylesService: BraidingStylesService,
     private crudService: CrudserviceService,
@@ -526,6 +532,46 @@ export class ProductDetailsComponent {
     let imgUrl = this.braidStyle.imageUrl == null ? this.def_img : this.braidStyle.imageUrl[0]?.url;
     return `http://${this.serverIp}:8000${imgUrl}`;
   }
+  
+  moveNextImage(): void {
+    if (!this.braidStyle?.imageUrl || this.braidStyle.imageUrl.length <= 1) {
+      return; // No images or only one image, nothing to change
+    }
+
+    this.currentImageIndex++;
+
+    if (this.currentImageIndex >= this.braidStyle.imageUrl.length) {
+      this.currentImageIndex = 0;
+    }
+
+    // Update the image source
+    this.updateImageSource();
+  }
+
+  movePreviousImage(): void {
+    if (!this.braidStyle?.imageUrl || this.braidStyle.imageUrl.length <= 1) {
+      return; // No images or only one image, nothing to change
+    }
+
+    this.currentImageIndex--;
+
+    if (this.currentImageIndex < 0) {
+      this.currentImageIndex = this.braidStyle.imageUrl.length - 1;
+    }
+
+    // Update the image source
+    this.updateImageSource();
+  }
+
+  updateImageSource(): void {
+    if (this.braidStyle?.imageUrl && this.braidStyle.imageUrl.length > 0) {
+      const imgUrl = this.braidStyle.imageUrl[this.currentImageIndex]?.url;
+      const img_element = document.querySelector('#braid_image') as HTMLImageElement;
+      if (img_element) {
+        img_element.src = `http://${this.serverIp}:8000${imgUrl}`;
+      }
+    }
+  }
 
   is_main_image(): boolean{
     return this.braidStyle?.imageUrl?.is_main_image == 1;
@@ -567,8 +613,91 @@ export class ProductDetailsComponent {
       }
     });
   }
+  deleteImage(): void {
+    let imageId = this.braidStyle.imageUrl[this.currentImageIndex]?.img_id;
+
+    if(imageId){
+      if (confirm('Are you sure you want to delete this image?')) {
+        this.crudService.delete(`hairstyle-images`, imageId).subscribe({
+          next: (response: any) => {
+            console.log('Image deleted:', response);
+            this.toastService.success('Image deleted successfully');
+            this.fetchBraidingStyle(); // Refresh the image list
+            this.currentImageIndex = 0;
+            this.updateImageSource;
+          },
+          error: (error: any) => {
+            console.error('Image deletion error:', error);
+            this.toastService.error('Image deletion failed');
+          }
+        });
+      }
+    }
+
+    }
+
+  
+  // Mouse events for dragging images
+  @HostListener('mousedown', ['$event'])
+  onMouseDown(event: MouseEvent): void {
+    if (event.target === this.imgWrapper?.nativeElement) {
+      this.isDragging = true;
+      this.startX = event.clientX;
+    }
+  }
+
+  @HostListener('mousemove', ['$event'])
+  onMouseMove(event: MouseEvent): void {
+    if (this.isDragging) {
+      const diff = event.clientX - this.startX;
+      if (Math.abs(diff) > 50) { // Adjust threshold as needed
+        if (diff > 0) {
+          this.movePreviousImage();
+        } else {
+          this.moveNextImage();
+        }
+        this.isDragging = false;
+      }
+    }
+  }
+
+  @HostListener('mouseup', ['$event'])
+  onMouseUp(event: MouseEvent): void {
+    this.isDragging = false;
+  }
+
+  @HostListener('mouseleave', ['$event'])
+  onMouseLeave(event: MouseEvent): void {
+    this.isDragging = false;
+  }
+
+  // Touch events for dragging images
+  @HostListener('touchstart', ['$event'])
+  onTouchStart(event: TouchEvent): void {
+    this.isDragging = true;
+    this.startX = event.touches[0].clientX;
+  }
+
+  @HostListener('touchmove', ['$event'])
+  onTouchMove(event: TouchEvent): void {
+    if (this.isDragging) {
+      const diff = event.touches[0].clientX - this.startX;
+      if (Math.abs(diff) > 50) { // Adjust threshold as needed
+        if (diff > 0) {
+          this.movePreviousImage();
+        } else {
+          this.moveNextImage();
+        }
+        this.isDragging = false;
+      }
+    }
+  }
   
   
   
   
 }
+  
+
+
+
