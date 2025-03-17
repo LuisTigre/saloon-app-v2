@@ -1251,6 +1251,11 @@
   resolved "https://registry.npmjs.org/@esbuild/win32-x64/-/win32-x64-0.20.1.tgz"
   integrity sha512-0MBh53o6XtI6ctDnRMeQ+xoCN8kD2qI1rY1KgF/xdWQwoFeKou7puvDfV8/Wv4Ctx2rRpET/gGdz3YlNtNACSA==
 
+"@fontsource/roboto@^5.2.5":
+  version "5.2.5"
+  resolved "https://registry.npmjs.org/@fontsource/roboto/-/roboto-5.2.5.tgz"
+  integrity sha512-70r2UZ0raqLn5W+sPeKhqlf8wGvUXFWlofaDlcbt/S3d06+17gXKr3VNqDODB0I1ASme3dGT5OJj9NABt7OTZQ==
+
 "@fullcalendar/angular@^6.1.15":
   version "6.1.16"
   resolved "https://registry.npmjs.org/@fullcalendar/angular/-/angular-6.1.16.tgz"
